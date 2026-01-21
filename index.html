@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TZPL0QW8MG"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-TZPL0QW8MG');
     </script>
     
@@ -156,7 +155,13 @@
                 <div class="lg:w-1/2 w-full">
                     <div class="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 bg-black group transform hover:scale-[1.01] transition duration-500">
                         <!-- Iframe do Google Drive (Método Estável) -->
-                        <iframe class="w-full h-full" src="https://drive.google.com/file/d/1joMmnaytUroXeoZMlwQohuptoycloUmA/preview" title="Vídeo Promocional" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <!-- Adicionei scale-[1.02] para cortar levemente as bordas pretas do player -->
+                        <iframe class="w-full h-full transform scale-[1.02]" src="https://drive.google.com/file/d/1joMmnaytUroXeoZMlwQohuptoycloUmA/preview" title="Vídeo Promocional" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        
+                        <!-- CAMADA DE BLOQUEIO (MÁSCARA INVISÍVEL) -->
+                        <!-- Essa div cobre o botão "Pop-out" do Drive para ninguém clicar -->
+                        <div class="absolute top-0 right-0 w-24 h-24 z-50 bg-transparent cursor-default"></div>
+
                         <!-- Borda decorativa -->
                         <div class="absolute inset-0 pointer-events-none border-2 border-potiguar/40 rounded-2xl z-20"></div>
                     </div>

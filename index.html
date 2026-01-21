@@ -145,11 +145,20 @@
 
                 <div class="lg:w-1/2 w-full">
                     <div class="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 bg-black group transform hover:scale-[1.01] transition duration-500">
-                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ?mute=1" title="Vídeo Promocional" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <!-- VÍDEO INTELIGENTE (HTML5) 
+                             1. Sem ícones do Google Drive
+                             2. Autoplay quando visível
+                             3. Pausa quando sai da tela
+                        -->
+                        <video id="promoVideo" class="w-full h-full object-cover rounded-xl" playsinline muted loop controls>
+                            <!-- Link direto convertido do Google Drive para stream -->
+                            <source src="https://drive.google.com/uc?export=download&id=1joMmnaytUroXeoZMlwQohuptoycloUmA" type="video/mp4">
+                            Seu navegador não suporta este vídeo.
+                        </video>
                         <div class="absolute inset-0 pointer-events-none border-2 border-potiguar/40 rounded-2xl z-20"></div>
                     </div>
                     <p class="text-center text-sm text-gray-500 mt-4 flex items-center justify-center gap-2">
-                        <i class="fas fa-play-circle text-potiguar"></i> Assista para entender como funciona
+                        <i class="fas fa-volume-mute text-potiguar"></i> O vídeo inicia sem som para não atrapalhar
                     </p>
                 </div>
             </div>
@@ -251,7 +260,7 @@
                             </div>
                         </div>
 
-                        <!-- Campo Ouro (Checkbox style) para manter a inteligência do form anterior, mas com visual clean -->
+                        <!-- Campo Ouro -->
                         <div class="bg-blue-50/50 p-5 rounded-lg border border-blue-100 mt-6">
                             <label class="block text-base font-bold text-potiguar-dark mb-3 text-center">
                                 <i class="fas fa-bullseye mr-2"></i> Qual seu interesse principal?
@@ -302,8 +311,33 @@
         </div>
     </footer>
 
-    <!-- SCRIPT DE ENVIO -->
+    <!-- SCRIPTS DE COMPORTAMENTO E ENVIO -->
     <script>
+        // 1. Controle Inteligente do Vídeo (Autoplay no Scroll + Stop ao Sair)
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('promoVideo');
+            
+            // Verifica se o vídeo existe na página
+            if (video) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Entrou na tela: Play
+                            video.play().catch(error => {
+                                console.log("Autoplay bloqueado pelo navegador (necessário interação ou mudo):", error);
+                            });
+                        } else {
+                            // Saiu da tela: Pause
+                            video.pause();
+                        }
+                    });
+                }, { threshold: 0.5 }); // Ativa quando 50% do vídeo estiver visível
+
+                observer.observe(video);
+            }
+        });
+
+        // 2. Envio do Formulário
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx8swlEMNhx6NdK7s5wGBSD2Oc91DCAzDQw8Fvz23uezdABdCYOpHJbQGNvps4bHjuz4w/exec';
 
         const form = document.getElementById('vipForm');
@@ -333,27 +367,22 @@
             const formData = new FormData(form);
             const data = new URLSearchParams();
 
-            // Mapeia os campos para o formato que o Google Apps Script espera
             data.append('nome', formData.get('nome'));
             data.append('whatsapp', formData.get('whatsapp'));
             data.append('endereco', formData.get('endereco'));
             data.append('bairro', formData.get('bairro'));
             data.append('cliente', formData.get('cliente'));
-            data.append('origem', formData.get('origem')); // "Site Web"
+            data.append('origem', formData.get('origem')); 
             data.append('interesse', interessesSelecionados);
 
             console.log("Enviando para:", SCRIPT_URL);
 
             fetch(SCRIPT_URL, {
                 method: 'POST',
-                body: data
+                body: data,
+                mode: 'no-cors' 
             })
-            .then(res => res.text())
-            .then(text => {
-                if (text !== 'OK') {
-                    throw new Error(text);
-                }
-                // Sucesso
+            .then(() => {
                 successMessage.classList.remove('hidden');
                 successMessage.classList.add('flex');
                 form.classList.add('hidden');

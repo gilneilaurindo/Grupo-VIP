@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo VIP Potiguar Eletro - Convite Exclusivo</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Fonte Google Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        potiguar: {
+                            DEFAULT: '#FF6600',
+                            dark: '#CC5200',
+                            light: '#FF8533'
+                        },
+                        dark: {
+                            900: '#111111',
+                            800: '#1A1A1A'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-pattern {
+            background-color: #000000;
+            background-image: radial-gradient(#FF6600 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .pulse-btn {
+            animation: pulse-orange 2s infinite;
+        }
+        @keyframes pulse-orange {
+            0% { box-shadow: 0 0 0 0 rgba(255, 102, 0, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 102, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 102, 0, 0); }
+        }
+        /* Loading Spinner */
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 3px solid #FF6600;
+            width: 20px;
+            height: 20px;
+            -webkit-animation: spin 1s linear infinite; /* Safari */
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+    <!-- HEADER / LOGO -->
+    <header class="bg-black py-4 border-b-4 border-potiguar sticky top-0 z-50">
+        <div class="container mx-auto px-4 flex justify-center">
+            <div class="text-white font-extrabold text-2xl tracking-tighter flex items-center gap-2">
+                <i class="fas fa-bolt text-potiguar"></i> POTIGUAR <span class="text-potiguar">ELETRO</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="bg-dark-900 text-white py-12 lg:py-16 relative overflow-hidden">
+        <div class="absolute inset-0 hero-pattern opacity-20"></div>
+        <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-dark-900 to-transparent"></div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-10">
+                <div class="lg:w-1/2 text-center lg:text-left">
+                    <div class="inline-block bg-potiguar/20 text-potiguar border border-potiguar px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide mb-4 animate-bounce">
+                        <i class="fas fa-lock mr-1"></i> Acesso Restrito
+                    </div>
+                    <h1 class="text-4xl lg:text-5xl font-extrabold leading-tight mb-4">
+                        Ofertas que <span class="text-red-500 line-through decoration-4 decoration-white opacity-70">não vão</span> pro Instagram.
+                        <br><span class="text-potiguar">Só no Grupo VIP.</span>
+                    </h1>
+                    <p class="text-gray-300 text-lg mb-8 leading-relaxed">
+                        Receba promoções relâmpago, descontos agressivos e lançamentos exclusivos antes de abrir para o público geral.
+                    </p>
+                    <a href="#cadastro" class="hidden lg:inline-block bg-potiguar hover:bg-potiguar-dark text-white font-bold py-4 px-8 rounded-lg shadow-lg transform transition hover:-translate-y-1 hover:shadow-potiguar/50 text-lg">
+                        QUERO ENTRAR NA LISTA VIP <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <div class="lg:w-1/2 w-full">
+                    <div class="relative w-full aspect-video rounded-xl overflow-hidden shadow-2xl border-4 border-gray-800 bg-black group">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ?mute=1" title="Vídeo Promocional" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <div class="absolute inset-0 pointer-events-none border-2 border-potiguar/30 rounded-xl"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFÍCIOS -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">O que você recebe <span class="bg-potiguar text-white px-2">PRIMEIRO</span>:</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition duration-300">
+                    <div class="w-12 h-12 bg-potiguar/10 rounded-full flex items-center justify-center mb-4 text-potiguar text-2xl"><i class="fas fa-stopwatch"></i></div>
+                    <h3 class="font-bold text-lg mb-2">Descontos Relâmpago</h3>
+                    <p class="text-sm text-gray-600">Promoções agressivas que duram poucas horas e acabam rápido.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition duration-300">
+                    <div class="w-12 h-12 bg-potiguar/10 rounded-full flex items-center justify-center mb-4 text-potiguar text-2xl"><i class="fas fa-box-open"></i></div>
+                    <h3 class="font-bold text-lg mb-2">Pré-vendas Exclusivas</h3>
+                    <p class="text-sm text-gray-600">Compre lançamentos e novidades antes de abrirem para o público.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition duration-300">
+                    <div class="w-12 h-12 bg-potiguar/10 rounded-full flex items-center justify-center mb-4 text-potiguar text-2xl"><i class="fas fa-user-shield"></i></div>
+                    <h3 class="font-bold text-lg mb-2">Prioridade de Compra</h3>
+                    <p class="text-sm text-gray-600">Garanta produtos de estoque limitado na frente de todos.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition duration-300">
+                    <div class="w-12 h-12 bg-potiguar/10 rounded-full flex items-center justify-center mb-4 text-potiguar text-2xl"><i class="fas fa-money-bill-wave"></i></div>
+                    <h3 class="font-bold text-lg mb-2">Condições Especiais</h3>
+                    <p class="text-sm text-gray-600">Parcelamento e condições de pagamento exclusivas para o VIP.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORMULÁRIO DE CAPTURA -->
+    <section id="cadastro" class="py-16 bg-gradient-to-br from-gray-100 to-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
+                <div class="bg-dark-900 p-6 text-center border-b-4 border-potiguar">
+                    <h2 class="text-2xl font-bold text-white uppercase">Garantir minha Vaga</h2>
+                    <p class="text-gray-400 text-sm mt-1">Preencha para receber o link do grupo</p>
+                </div>
+
+                <div class="p-8 relative">
+                    <!-- Overlay de Sucesso (Oculto inicialmente) -->
+                    <div id="successMessage" class="hidden absolute inset-0 bg-white z-20 flex-col items-center justify-center text-center p-8">
+                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-4 text-green-600 text-4xl animate-bounce">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Cadastro Confirmado!</h3>
+                        <p class="text-gray-600 mb-6">Seus dados foram recebidos com sucesso. Em breve você receberá o link do grupo.</p>
+                        <a href="#" class="btn-gradient bg-potiguar text-white px-6 py-3 rounded-lg font-bold hover:bg-potiguar-dark transition">
+                            <i class="fab fa-whatsapp mr-2"></i> Falar no WhatsApp
+                        </a>
+                    </div>
+
+                    <!-- Formulário -->
+                    <form id="vipForm" class="space-y-6">
+                        
+                        <!-- Campos de Texto -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div class="col-span-2">
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Nome Completo</label>
+                                <div class="relative">
+                                    <span class="absolute left-3 top-3 text-gray-400"><i class="fas fa-user"></i></span>
+                                    <input type="text" name="nome" required class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-potiguar outline-none transition" placeholder="Seu nome">
+                                </div>
+                            </div>
+
+                            <div class="col-span-2 md:col-span-1">
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">WhatsApp</label>
+                                <div class="relative">
+                                    <span class="absolute left-3 top-3 text-green-500"><i class="fab fa-whatsapp"></i></span>
+                                    <input type="tel" name="whatsapp" required class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-potiguar outline-none transition" placeholder="(99) 99999-9999">
+                                </div>
+                            </div>
+
+                            <!-- ADICIONADO: Campo Endereço (Requerido pelo script) -->
+                            <div class="col-span-2 md:col-span-1">
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Endereço (Rua/Nº)</label>
+                                <div class="relative">
+                                    <span class="absolute left-3 top-3 text-gray-400"><i class="fas fa-home"></i></span>
+                                    <input type="text" name="endereco" required class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-potiguar outline-none transition" placeholder="Rua das Flores, 123">
+                                </div>
+                            </div>
+
+                            <div class="col-span-2">
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Bairro</label>
+                                <div class="relative">
+                                    <span class="absolute left-3 top-3 text-gray-400"><i class="fas fa-map-marker-alt"></i></span>
+                                    <input type="text" name="bairro" required class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-potiguar outline-none transition" placeholder="Onde você mora?">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Origem (Mapeado para 'cliente' no script) -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Já é cliente Potiguar?</label>
+                            <select name="cliente" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-potiguar outline-none bg-white">
+                                <option value="" disabled selected>Selecione uma opção...</option>
+                                <option value="Sim, ja sou cliente">Sim, já sou cliente</option>
+                                <option value="Nao, primeira vez">Não, primeira vez</option>
+                                <option value="Indicacao">Indicação de amigo</option>
+                                <option value="Instagram/Facebook">Vi no Instagram/Facebook</option>
+                                <option value="Google">Achei no Google</option>
+                            </select>
+                        </div>
+
+                        <!-- Interesse (Ouro) -->
+                        <div class="bg-orange-50 p-5 rounded-xl border border-orange-200">
+                            <label class="block text-base font-bold text-potiguar-dark mb-3 text-center">
+                                <i class="fas fa-bullseye mr-1"></i> O que você tem mais interesse hoje?
+                            </label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="flex items-center space-x-3 bg-white p-3 rounded-lg border border-gray-200 cursor-pointer hover:border-potiguar transition">
+                                    <input type="checkbox" name="interesse" value="Eletrodomesticos" class="w-5 h-5 text-potiguar rounded">
+                                    <span class="text-sm font-medium text-gray-700">Eletrodomésticos</span>
+                                </label>
+                                <label class="flex items-center space-x-3 bg-white p-3 rounded-lg border border-gray-200 cursor-pointer hover:border-potiguar transition">
+                                    <input type="checkbox" name="interesse" value="Moveis" class="w-5 h-5 text-potiguar rounded">
+                                    <span class="text-sm font-medium text-gray-700">Móveis</span>
+                                </label>
+                                <label class="flex items-center space-x-3 bg-white p-3 rounded-lg border border-gray-200 cursor-pointer hover:border-potiguar transition">
+                                    <input type="checkbox" name="interesse" value="TV e Eletronicos" class="w-5 h-5 text-potiguar rounded">
+                                    <span class="text-sm font-medium text-gray-700">TV e Eletrônicos</span>
+                                </label>
+                                <label class="flex items-center space-x-3 bg-white p-3 rounded-lg border border-gray-200 cursor-pointer hover:border-potiguar transition">
+                                    <input type="checkbox" name="interesse" value="Tudo / Promocoes" class="w-5 h-5 text-potiguar rounded">
+                                    <span class="text-sm font-medium text-gray-700">Tudo / Promoções</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-2 bg-gray-50 p-3 rounded text-xs text-gray-500">
+                            <i class="fas fa-lock text-green-600 mt-1"></i>
+                            <p>Seus dados estão 100% seguros conforme a <strong>LGPD</strong>.</p>
+                        </div>
+
+                        <!-- Botão Submit -->
+                        <button id="submitBtn" type="submit" class="w-full pulse-btn bg-green-600 hover:bg-green-700 text-white font-extrabold text-xl py-4 rounded-xl shadow-lg transition duration-300 flex items-center justify-center gap-2 uppercase tracking-wide">
+                            <span id="btnText"><i class="fab fa-whatsapp text-2xl"></i> Entrar no Grupo Agora</span>
+                            <span id="btnLoader" class="loader hidden"></span>
+                        </button>
+                        <p class="text-center text-xs text-gray-400 mt-2">Você receberá o convite em até 24 horas.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black text-white py-8 border-t border-gray-800 text-center">
+        <p class="text-gray-500 text-sm">© 2024 Potiguar Eletro.</p>
+    </footer>
+
+    <!-- SCRIPT DE ENVIO ATUALIZADO (ROBUSTO) -->
+    <script>
+        // 🚨 ATENÇÃO: URL atualizada conforme solicitado
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzgA7TpflLhKFqhYWvWi51U3PBgdJU0CrRLACVbSI23hqlpYkxN7I2uc8kQ6lWFRvri1w/exec';
+
+        const form = document.getElementById('vipForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const btnLoader = document.getElementById('btnLoader');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            
+            // UI de carregamento
+            submitBtn.disabled = true;
+            btnText.textContent = "Enviando...";
+            btnLoader.classList.remove('hidden');
+
+            // Captura dados do formulário
+            const rawFormData = new FormData(form);
+            const data = new URLSearchParams();
+
+            // Processa campos normais
+            for (const pair of rawFormData) {
+                if (pair[0] !== 'interesse') { // Ignora checkbox aqui para tratar depois
+                    data.append(pair[0], pair[1]);
+                }
+            }
+
+            // Tratamento especial para Checkboxes (Interesses)
+            // Junta todos os marcados com uma vírgula (Ex: "Móveis, TV")
+            const checkboxes = document.querySelectorAll('input[name="interesse"]:checked');
+            const interessesSelecionados = Array.from(checkboxes).map(cb => cb.value).join(', ');
+            
+            if (interessesSelecionados) {
+                data.append('interesse', interessesSelecionados);
+            } else {
+                // Se nada for marcado, evita erro no script
+                data.append('interesse', 'Nenhum'); 
+            }
+
+            // Envio Otimizado para Apps Script
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: data, // Envia formato URL-Encoded (mais seguro para esse script)
+                mode: 'no-cors'
+            })
+            .then(response => {
+                // Sucesso!
+                successMessage.classList.remove('hidden');
+                successMessage.classList.add('flex');
+                form.classList.add('hidden');
+                // Rola a página para cima suavemente para ver a mensagem
+                document.getElementById('cadastro').scrollIntoView({ behavior: 'smooth' });
+            })
+            .catch(error => {
+                console.error('Erro!', error.message);
+                alert('Ocorreu um erro ao conectar com a planilha. Verifique se o Script foi implantado como "Qualquer pessoa" (Anyone).');
+                submitBtn.disabled = false;
+                btnText.textContent = "Tentar Novamente";
+                btnLoader.classList.add('hidden');
+            });
+        });
+    </script>
+
+</body>
+</html>

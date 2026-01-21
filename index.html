@@ -22,7 +22,7 @@
     <meta property="twitter:image" content="https://raw.githubusercontent.com/gilneilaurindo/Grupo-VIP/main/LOGO%20POTIGUAR.png">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/gilneilaurindo/Grupo-VIP/main/iconpng.png">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/gilneilaurindo/Grupo-VIP/main/%3Clink%20rel%3D%22icon%22%20type%3D%22image/iconpng.png">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -80,6 +80,32 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+        
+        /* Estilos do Formulário Tradicional (Integrados) */
+        .form-traditional input, 
+        .form-traditional select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: #f9fafb;
+            transition: all 0.3s;
+        }
+        .form-traditional input:focus, 
+        .form-traditional select:focus {
+            border-color: #0055FF;
+            background-color: #fff;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.1);
+        }
+        .form-traditional label {
+            display: block;
+            margin-bottom: 6px;
+            color: #4b5563;
+            font-weight: 600;
+            font-size: 0.95rem;
         }
     </style>
 </head>
@@ -165,125 +191,101 @@
         </div>
     </section>
 
-    <!-- FORMULÁRIO DE CAPTURA -->
+    <!-- FORMULÁRIO DE CAPTURA (Estilo Tradicional Integrado) -->
     <section id="cadastro" class="py-12 lg:py-20 bg-gradient-to-br from-blue-50 to-white">
         <div class="container mx-auto px-4">
-            <div class="max-w-2xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+            <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-100">
+                <!-- Header do Form -->
                 <div class="bg-dark-900 p-6 lg:p-8 text-center border-b-8 border-potiguar">
-                    <h2 class="text-2xl md:text-3xl font-bold text-white uppercase tracking-wide">Garantir minha Vaga</h2>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white uppercase tracking-wide">Cadastro Potiguar</h2>
                     <p class="text-potiguar-light text-sm mt-2 font-medium">Preencha para receber o link do grupo</p>
                 </div>
 
-                <div class="p-6 md:p-10 relative">
+                <div class="p-6 md:p-10 relative form-traditional">
                     <!-- Overlay de Sucesso -->
                     <div id="successMessage" class="hidden absolute inset-0 bg-white z-20 flex-col items-center justify-center text-center p-8">
                         <div class="w-20 h-20 lg:w-24 lg:h-24 bg-green-100 rounded-full flex items-center justify-center mb-6 text-green-600 text-4xl lg:text-5xl animate-bounce">
                             <i class="fas fa-check"></i>
                         </div>
-                        <h3 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Cadastro Confirmado!</h3>
-                        <p class="text-gray-600 mb-8 max-w-sm mx-auto">Seus dados foram recebidos com sucesso. Em breve você receberá o link do grupo.</p>
-                        <a href="#" class="w-full max-w-xs btn-gradient bg-potiguar text-white px-6 py-4 rounded-xl font-bold hover:bg-potiguar-dark transition shadow-lg flex items-center justify-center gap-2">
+                        <h3 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Cadastro realizado com sucesso!</h3>
+                        <p class="text-gray-600 mb-8 max-w-sm mx-auto">Em breve você receberá o convite para o grupo.</p>
+                        <a href="#" class="w-full max-w-xs btn-gradient bg-potiguar text-white px-6 py-4 rounded-xl font-bold hover:bg-potiguar-dark transition shadow-lg flex items-center justify-center gap-2 text-center">
                             <i class="fab fa-whatsapp text-2xl"></i> Falar no WhatsApp
                         </a>
                     </div>
 
                     <!-- Formulário -->
-                    <form id="vipForm" class="space-y-5 lg:space-y-6">
+                    <form id="vipForm" class="space-y-5">
                         
                         <!-- Campo Oculto ORIGEM -->
-                        <input type="hidden" name="origem" value="LP Cadastro">
+                        <input type="hidden" name="origem" value="Site Web">
 
-                        <!-- Campos de Texto -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5">
-                            <div class="col-span-2">
-                                <label class="block text-sm font-bold text-gray-700 mb-2 ml-1">Nome Completo</label>
-                                <div class="relative group">
-                                    <span class="absolute left-4 top-3.5 text-gray-400 group-focus-within:text-potiguar transition"><i class="fas fa-user"></i></span>
-                                    <input type="text" name="nome" required class="w-full pl-12 pr-4 py-3.5 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:ring-2 focus:ring-potiguar focus:border-transparent outline-none transition" placeholder="Digite seu nome">
-                                </div>
+                        <div class="form-group">
+                            <label for="nome">Nome Completo</label>
+                            <input type="text" name="nome" id="nome" placeholder="Ex: João da Silva" required>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="form-group">
+                                <label for="whatsapp">WhatsApp</label>
+                                <input type="tel" name="whatsapp" id="whatsapp" placeholder="(XX) 9XXXX-XXXX" required>
                             </div>
-
-                            <div class="col-span-2 md:col-span-1">
-                                <label class="block text-sm font-bold text-gray-700 mb-2 ml-1">WhatsApp</label>
-                                <div class="relative group">
-                                    <span class="absolute left-4 top-3.5 text-green-500"><i class="fab fa-whatsapp"></i></span>
-                                    <input type="tel" name="whatsapp" required class="w-full pl-12 pr-4 py-3.5 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:ring-2 focus:ring-potiguar focus:border-transparent outline-none transition" placeholder="(99) 99999-9999">
-                                </div>
-                            </div>
-
-                            <div class="col-span-2 md:col-span-1">
-                                <label class="block text-sm font-bold text-gray-700 mb-2 ml-1">Endereço (Rua/Nº)</label>
-                                <div class="relative group">
-                                    <span class="absolute left-4 top-3.5 text-gray-400 group-focus-within:text-potiguar transition"><i class="fas fa-home"></i></span>
-                                    <input type="text" name="endereco" required class="w-full pl-12 pr-4 py-3.5 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:ring-2 focus:ring-potiguar focus:border-transparent outline-none transition" placeholder="Rua das Flores, 123">
-                                </div>
-                            </div>
-
-                            <div class="col-span-2">
-                                <label class="block text-sm font-bold text-gray-700 mb-2 ml-1">Bairro</label>
-                                <div class="relative group">
-                                    <span class="absolute left-4 top-3.5 text-gray-400 group-focus-within:text-potiguar transition"><i class="fas fa-map-marker-alt"></i></span>
-                                    <input type="text" name="bairro" required class="w-full pl-12 pr-4 py-3.5 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:ring-2 focus:ring-potiguar focus:border-transparent outline-none transition" placeholder="Onde você mora?">
-                                </div>
+                            <div class="form-group">
+                                <label for="endereco">Endereço</label>
+                                <input type="text" name="endereco" id="endereco" placeholder="Rua, número" required>
                             </div>
                         </div>
 
-                        <!-- Origem -->
-                        <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-2 ml-1">Já é cliente Potiguar?</label>
-                            <div class="relative">
-                                <select name="cliente" required class="w-full pl-4 pr-10 py-3.5 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:ring-2 focus:ring-potiguar focus:border-transparent outline-none appearance-none transition">
-                                    <option value="" disabled selected>Selecione uma opção...</option>
-                                    <option value="Sim, ja sou cliente">Sim, já sou cliente</option>
-                                    <option value="Nao, primeira vez">Não, primeira vez</option>
-                                    <option value="Indicacao">Indicação de amigo</option>
-                                    <option value="Instagram/Facebook">Vi no Instagram/Facebook</option>
-                                    <option value="Google">Achei no Google</option>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="form-group">
+                                <label for="bairro">Bairro</label>
+                                <input type="text" name="bairro" id="bairro" placeholder="Ex: Centro" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cliente">Você já é cliente?</label>
+                                <select name="cliente" id="cliente" required>
+                                    <option value="" disabled selected>Selecione...</option>
+                                    <option value="Sim">Sim, já sou cliente</option>
+                                    <option value="Não">Não, sou novo</option>
                                 </select>
-                                <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-500">
-                                    <i class="fas fa-chevron-down text-xs"></i>
-                                </div>
                             </div>
                         </div>
 
-                        <!-- Interesse (Ouro) -->
-                        <div class="bg-blue-50/50 p-5 lg:p-6 rounded-2xl border border-blue-100">
-                            <label class="block text-base lg:text-lg font-bold text-potiguar-dark mb-4 text-center">
-                                <i class="fas fa-bullseye mr-2"></i> O que você tem mais interesse hoje?
+                        <!-- Campo Ouro (Checkbox style) para manter a inteligência do form anterior, mas com visual clean -->
+                        <div class="bg-blue-50/50 p-5 rounded-lg border border-blue-100 mt-6">
+                            <label class="block text-base font-bold text-potiguar-dark mb-3 text-center">
+                                <i class="fas fa-bullseye mr-2"></i> Qual seu interesse principal?
                             </label>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <label class="flex items-center space-x-3 bg-white p-4 rounded-xl border border-gray-200 cursor-pointer hover:border-potiguar hover:shadow-md transition group">
-                                    <input type="checkbox" name="interesse" value="Eletrodomesticos" class="w-5 h-5 text-potiguar rounded border-gray-300 focus:ring-potiguar">
-                                    <span class="text-sm font-semibold text-gray-700 group-hover:text-potiguar transition">Eletrodomésticos</span>
+                                <label class="flex items-center space-x-3 bg-white p-3 rounded-lg border border-gray-200 cursor-pointer hover:border-potiguar hover:shadow-sm transition">
+                                    <input type="checkbox" name="interesse" value="Eletrodomesticos" class="w-5 h-5 text-potiguar rounded border-gray-300">
+                                    <span class="text-sm font-semibold text-gray-700">Eletrodomésticos</span>
                                 </label>
-                                <label class="flex items-center space-x-3 bg-white p-4 rounded-xl border border-gray-200 cursor-pointer hover:border-potiguar hover:shadow-md transition group">
-                                    <input type="checkbox" name="interesse" value="Moveis" class="w-5 h-5 text-potiguar rounded border-gray-300 focus:ring-potiguar">
-                                    <span class="text-sm font-semibold text-gray-700 group-hover:text-potiguar transition">Móveis</span>
+                                <label class="flex items-center space-x-3 bg-white p-3 rounded-lg border border-gray-200 cursor-pointer hover:border-potiguar hover:shadow-sm transition">
+                                    <input type="checkbox" name="interesse" value="Moveis" class="w-5 h-5 text-potiguar rounded border-gray-300">
+                                    <span class="text-sm font-semibold text-gray-700">Móveis</span>
                                 </label>
-                                <label class="flex items-center space-x-3 bg-white p-4 rounded-xl border border-gray-200 cursor-pointer hover:border-potiguar hover:shadow-md transition group">
-                                    <input type="checkbox" name="interesse" value="TV e Eletronicos" class="w-5 h-5 text-potiguar rounded border-gray-300 focus:ring-potiguar">
-                                    <span class="text-sm font-semibold text-gray-700 group-hover:text-potiguar transition">TV e Eletrônicos</span>
+                                <label class="flex items-center space-x-3 bg-white p-3 rounded-lg border border-gray-200 cursor-pointer hover:border-potiguar hover:shadow-sm transition">
+                                    <input type="checkbox" name="interesse" value="Eletronicos" class="w-5 h-5 text-potiguar rounded border-gray-300">
+                                    <span class="text-sm font-semibold text-gray-700">Eletrônicos</span>
                                 </label>
-                                <label class="flex items-center space-x-3 bg-white p-4 rounded-xl border border-gray-200 cursor-pointer hover:border-potiguar hover:shadow-md transition group">
-                                    <input type="checkbox" name="interesse" value="Tudo / Promocoes" class="w-5 h-5 text-potiguar rounded border-gray-300 focus:ring-potiguar">
-                                    <span class="text-sm font-semibold text-gray-700 group-hover:text-potiguar transition">Tudo / Promoções</span>
+                                <label class="flex items-center space-x-3 bg-white p-3 rounded-lg border border-gray-200 cursor-pointer hover:border-potiguar hover:shadow-sm transition">
+                                    <input type="checkbox" name="interesse" value="Promocoes" class="w-5 h-5 text-potiguar rounded border-gray-300">
+                                    <span class="text-sm font-semibold text-gray-700">Tudo / Promoções</span>
                                 </label>
                             </div>
                         </div>
 
-                        <div class="flex items-center gap-3 bg-gray-50 p-4 rounded-xl text-xs text-gray-500 border border-gray-100">
-                            <i class="fas fa-shield-alt text-2xl text-green-500"></i>
-                            <p class="leading-tight">Seus dados estão 100% seguros. Respeitamos sua privacidade conforme a <strong>LGPD</strong>.</p>
+                        <div class="flex items-center gap-2 mt-4 text-xs text-gray-500">
+                            <i class="fas fa-shield-alt text-green-500"></i>
+                            <p>Seus dados estão seguros.</p>
                         </div>
 
                         <!-- Botão Submit -->
-                        <button id="submitBtn" type="submit" class="w-full pulse-btn bg-green-600 hover:bg-green-700 text-white font-extrabold text-lg lg:text-xl py-4 rounded-xl shadow-lg transition duration-300 flex items-center justify-center gap-3 uppercase tracking-wide group">
-                            <span id="btnText" class="flex items-center gap-2">
-                                <i class="fab fa-whatsapp text-2xl group-hover:scale-110 transition"></i> Entrar no Grupo Agora
-                            </span>
+                        <button id="submitBtn" type="submit" class="w-full pulse-btn bg-potiguar hover:bg-potiguar-dark text-white font-bold text-lg py-4 rounded-lg shadow-lg transition duration-300 flex items-center justify-center gap-3 mt-6">
+                            <span id="btnText">Enviar Cadastro</span>
                             <span id="btnLoader" class="loader hidden"></span>
                         </button>
-                        <p class="text-center text-xs text-gray-400 mt-2">Você receberá o convite em até 24 horas.</p>
                     </form>
                 </div>
             </div>
@@ -300,9 +302,9 @@
         </div>
     </footer>
 
-    <!-- SCRIPT DE ENVIO CORRIGIDO E OTIMIZADO -->
+    <!-- SCRIPT DE ENVIO -->
     <script>
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwICkC1_4Ud-b6ga3KoRRzI8mCFCKVVaH9FJK5OPax9MuVIifUXOVwWBI9IG4EOPCPqnQ/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx8swlEMNhx6NdK7s5wGBSD2Oc91DCAzDQw8Fvz23uezdABdCYOpHJbQGNvps4bHjuz4w/exec';
 
         const form = document.getElementById('vipForm');
         const submitBtn = document.getElementById('submitBtn');
@@ -313,14 +315,12 @@
         form.addEventListener('submit', e => {
             e.preventDefault();
             
-            // 1. Validação do Campo Ouro (Interesses)
-            // Se o usuário não marcar nada, não enviamos.
+            // Validação de Interesses
             const checkboxes = document.querySelectorAll('input[name="interesse"]:checked');
             const interessesSelecionados = Array.from(checkboxes).map(cb => cb.value).join(', ');
 
             if (!interessesSelecionados) {
-                alert('Por favor, selecione pelo menos um interesse (Eletrodomésticos, Móveis, etc).');
-                // Garante que o botão não trave se já tiver sido clicado antes
+                alert('Por favor, selecione pelo menos um interesse.');
                 return;
             }
 
@@ -329,34 +329,31 @@
             btnText.textContent = "Enviando...";
             btnLoader.classList.remove('hidden');
 
-            // Captura dados do formulário
+            // Captura dados
             const formData = new FormData(form);
             const data = new URLSearchParams();
 
+            // Mapeia os campos para o formato que o Google Apps Script espera
             data.append('nome', formData.get('nome'));
             data.append('whatsapp', formData.get('whatsapp'));
             data.append('endereco', formData.get('endereco'));
             data.append('bairro', formData.get('bairro'));
             data.append('cliente', formData.get('cliente'));
-            data.append('origem', formData.get('origem') || 'LP Cadastro');
+            data.append('origem', formData.get('origem')); // "Site Web"
             data.append('interesse', interessesSelecionados);
 
-            console.log("Enviando...");
+            console.log("Enviando para:", SCRIPT_URL);
 
-            // 2. Fetch Correto (sem no-cors)
-            // Agora conseguimos ler se o Apps Script retornou "OK" ou erro.
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 body: data
             })
-            .then(res => res.text()) // Converte a resposta para texto
+            .then(res => res.text())
             .then(text => {
-                // O script retorna "OK" se der tudo certo
                 if (text !== 'OK') {
-                    throw new Error(text); // Força erro se não for OK
+                    throw new Error(text);
                 }
-
-                // Sucesso!
+                // Sucesso
                 successMessage.classList.remove('hidden');
                 successMessage.classList.add('flex');
                 form.classList.add('hidden');
@@ -364,11 +361,9 @@
             })
             .catch(error => {
                 console.error('Erro no envio:', error);
-                alert('Ocorreu um erro ao enviar. Tente novamente ou chame no WhatsApp.');
-                
-                // Reseta o botão para permitir nova tentativa
+                alert('Erro ao enviar. Verifique sua conexão ou tente novamente.');
                 submitBtn.disabled = false;
-                btnText.innerHTML = '<i class="fab fa-whatsapp text-2xl"></i> Tentar Novamente';
+                btnText.textContent = "Tentar Novamente";
                 btnLoader.classList.add('hidden');
             });
         });

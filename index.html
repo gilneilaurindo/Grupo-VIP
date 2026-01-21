@@ -3,7 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- META TAGS OTIMIZADAS PARA REDES SOCIAIS -->
     <title>Grupo VIP Potiguar Eletro - Convite Exclusivo</title>
+    <meta name="description" content="Entre para o Grupo VIP da Potiguar Eletro e receba ofertas exclusivas, descontos relâmpago e lançamentos antes de todo mundo.">
+    
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://potiguareletro.com.br/">
+    <meta property="og:title" content="Grupo VIP Potiguar Eletro - Ofertas Exclusivas">
+    <meta property="og:description" content="Receba descontos relâmpago e lançamentos primeiro que todo mundo no nosso Grupo VIP.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/gilneilaurindo/Grupo-VIP/main/LOGO%20POTIGUAR.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Grupo VIP Potiguar Eletro">
+    <meta property="twitter:description" content="Ofertas que não vão pro Instagram. Só no Grupo VIP.">
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/gilneilaurindo/Grupo-VIP/main/LOGO%20POTIGUAR.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/gilneilaurindo/Grupo-VIP/main/iconpng.png">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Ícones -->
@@ -17,13 +37,13 @@
                 extend: {
                     colors: {
                         potiguar: {
-                            DEFAULT: '#FF6600',
-                            dark: '#CC5200',
-                            light: '#FF8533'
+                            DEFAULT: '#0055FF', // Azul Principal Vibrante
+                            dark: '#0033CC',    // Azul Escuro (Hover)
+                            light: '#3388FF'    // Azul Claro (Detalhes)
                         },
                         dark: {
-                            900: '#111111',
-                            800: '#1A1A1A'
+                            900: '#0a0a0a',
+                            800: '#151515'
                         }
                     },
                     fontFamily: {
@@ -36,25 +56,25 @@
     <style>
         .hero-pattern {
             background-color: #000000;
-            background-image: radial-gradient(#FF6600 1px, transparent 1px);
+            background-image: radial-gradient(#0055FF 1px, transparent 1px);
             background-size: 30px 30px;
         }
         .pulse-btn {
-            animation: pulse-orange 2s infinite;
+            animation: pulse-blue 2s infinite;
         }
-        @keyframes pulse-orange {
-            0% { box-shadow: 0 0 0 0 rgba(255, 102, 0, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(255, 102, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 102, 0, 0); }
+        @keyframes pulse-blue {
+            0% { box-shadow: 0 0 0 0 rgba(0, 85, 255, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 85, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 85, 255, 0); }
         }
         /* Loading Spinner */
         .loader {
             border: 3px solid #f3f3f3;
             border-radius: 50%;
-            border-top: 3px solid #FF6600;
+            border-top: 3px solid #0055FF;
             width: 20px;
             height: 20px;
-            -webkit-animation: spin 1s linear infinite; /* Safari */
+            -webkit-animation: spin 1s linear infinite;
             animation: spin 1s linear infinite;
         }
         @keyframes spin {
@@ -66,101 +86,104 @@
 <body class="bg-gray-50 text-gray-800 font-sans antialiased">
 
     <!-- HEADER / LOGO -->
-    <header class="bg-black py-4 border-b-4 border-potiguar sticky top-0 z-50">
+    <header class="bg-black py-3 border-b-4 border-potiguar sticky top-0 z-50 shadow-lg">
         <div class="container mx-auto px-4 flex justify-center">
-            <div class="text-white font-extrabold text-2xl tracking-tighter flex items-center gap-2">
-                <i class="fas fa-bolt text-potiguar"></i> POTIGUAR <span class="text-potiguar">ELETRO</span>
-            </div>
+            <img src="https://raw.githubusercontent.com/gilneilaurindo/Grupo-VIP/main/LOGO%20POTIGUAR.png" 
+                 alt="Potiguar Eletro" 
+                 class="h-16 md:h-20 object-contain hover:scale-105 transition-transform duration-300 brightness-0 invert">
         </div>
     </header>
 
     <!-- HERO SECTION -->
-    <section class="bg-dark-900 text-white py-12 lg:py-16 relative overflow-hidden">
+    <section class="bg-dark-900 text-white py-12 lg:py-20 relative overflow-hidden">
         <div class="absolute inset-0 hero-pattern opacity-20"></div>
         <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-dark-900 to-transparent"></div>
 
         <div class="container mx-auto px-4 relative z-10">
-            <div class="flex flex-col lg:flex-row items-center gap-10">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
                 <div class="lg:w-1/2 text-center lg:text-left">
-                    <div class="inline-block bg-potiguar/20 text-potiguar border border-potiguar px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide mb-4 animate-bounce">
+                    <div class="inline-block bg-potiguar/20 text-potiguar-light border border-potiguar px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wide mb-6 animate-bounce">
                         <i class="fas fa-lock mr-1"></i> Acesso Restrito
                     </div>
-                    <h1 class="text-4xl lg:text-5xl font-extrabold leading-tight mb-4">
-                        Ofertas que <span class="text-red-500 line-through decoration-4 decoration-white opacity-70">não vão</span> pro Instagram.
-                        <br><span class="text-potiguar">Só no Grupo VIP.</span>
+                    <h1 class="text-4xl lg:text-6xl font-extrabold leading-tight mb-6">
+                        Ofertas que <span class="text-red-500 line-through decoration-4 decoration-white/50 opacity-80">não vão</span> pro Instagram.
+                        <br><span class="text-potiguar bg-white/5 px-2 rounded-lg inline-block mt-2">Só no Grupo VIP.</span>
                     </h1>
-                    <p class="text-gray-300 text-lg mb-8 leading-relaxed">
+                    <p class="text-gray-300 text-lg lg:text-xl mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
                         Receba promoções relâmpago, descontos agressivos e lançamentos exclusivos antes de abrir para o público geral.
                     </p>
-                    <a href="#cadastro" class="hidden lg:inline-block bg-potiguar hover:bg-potiguar-dark text-white font-bold py-4 px-8 rounded-lg shadow-lg transform transition hover:-translate-y-1 hover:shadow-potiguar/50 text-lg">
-                        QUERO ENTRAR NA LISTA VIP <i class="fas fa-arrow-right ml-2"></i>
+                    <a href="#cadastro" class="hidden lg:inline-flex items-center bg-potiguar hover:bg-potiguar-dark text-white font-bold py-4 px-8 rounded-xl shadow-lg transform transition hover:-translate-y-1 hover:shadow-potiguar/50 text-lg">
+                        QUERO ENTRAR NA LISTA VIP <i class="fas fa-arrow-right ml-3"></i>
                     </a>
                 </div>
 
                 <div class="lg:w-1/2 w-full">
-                    <div class="relative w-full aspect-video rounded-xl overflow-hidden shadow-2xl border-4 border-gray-800 bg-black group">
+                    <div class="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 bg-black group transform hover:scale-[1.01] transition duration-500">
                         <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ?mute=1" title="Vídeo Promocional" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        <div class="absolute inset-0 pointer-events-none border-2 border-potiguar/30 rounded-xl"></div>
+                        <div class="absolute inset-0 pointer-events-none border-2 border-potiguar/40 rounded-2xl z-20"></div>
                     </div>
+                    <p class="text-center text-sm text-gray-500 mt-4 flex items-center justify-center gap-2">
+                        <i class="fas fa-play-circle text-potiguar"></i> Assista para entender como funciona
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- BENEFÍCIOS -->
-    <section class="py-12 bg-white">
+    <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900">O que você recebe <span class="bg-potiguar text-white px-2">PRIMEIRO</span>:</h2>
+            <div class="text-center mb-14">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">O que você recebe <span class="bg-potiguar text-white px-2 transform -skew-x-6 inline-block">PRIMEIRO</span>:</h2>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Card 1 -->
-                <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition duration-300">
-                    <div class="w-12 h-12 bg-potiguar/10 rounded-full flex items-center justify-center mb-4 text-potiguar text-2xl"><i class="fas fa-stopwatch"></i></div>
-                    <h3 class="font-bold text-lg mb-2">Descontos Relâmpago</h3>
-                    <p class="text-sm text-gray-600">Promoções agressivas que duram poucas horas e acabam rápido.</p>
+                <div class="group bg-gray-50 p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-potiguar/30 transition duration-300">
+                    <div class="w-14 h-14 bg-potiguar/10 rounded-2xl flex items-center justify-center mb-6 text-potiguar text-2xl group-hover:scale-110 transition duration-300"><i class="fas fa-stopwatch"></i></div>
+                    <h3 class="font-bold text-xl mb-3 text-gray-900">Descontos Relâmpago</h3>
+                    <p class="text-gray-600 leading-relaxed">Promoções agressivas que duram poucas horas e acabam rápido.</p>
                 </div>
                 <!-- Card 2 -->
-                <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition duration-300">
-                    <div class="w-12 h-12 bg-potiguar/10 rounded-full flex items-center justify-center mb-4 text-potiguar text-2xl"><i class="fas fa-box-open"></i></div>
-                    <h3 class="font-bold text-lg mb-2">Pré-vendas Exclusivas</h3>
-                    <p class="text-sm text-gray-600">Compre lançamentos e novidades antes de abrirem para o público.</p>
+                <div class="group bg-gray-50 p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-potiguar/30 transition duration-300">
+                    <div class="w-14 h-14 bg-potiguar/10 rounded-2xl flex items-center justify-center mb-6 text-potiguar text-2xl group-hover:scale-110 transition duration-300"><i class="fas fa-box-open"></i></div>
+                    <h3 class="font-bold text-xl mb-3 text-gray-900">Pré-vendas Exclusivas</h3>
+                    <p class="text-gray-600 leading-relaxed">Compre lançamentos e novidades antes de abrirem para o público.</p>
                 </div>
                 <!-- Card 3 -->
-                <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition duration-300">
-                    <div class="w-12 h-12 bg-potiguar/10 rounded-full flex items-center justify-center mb-4 text-potiguar text-2xl"><i class="fas fa-user-shield"></i></div>
-                    <h3 class="font-bold text-lg mb-2">Prioridade de Compra</h3>
-                    <p class="text-sm text-gray-600">Garanta produtos de estoque limitado na frente de todos.</p>
+                <div class="group bg-gray-50 p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-potiguar/30 transition duration-300">
+                    <div class="w-14 h-14 bg-potiguar/10 rounded-2xl flex items-center justify-center mb-6 text-potiguar text-2xl group-hover:scale-110 transition duration-300"><i class="fas fa-user-shield"></i></div>
+                    <h3 class="font-bold text-xl mb-3 text-gray-900">Prioridade de Compra</h3>
+                    <p class="text-gray-600 leading-relaxed">Garanta produtos de estoque limitado na frente de todos.</p>
                 </div>
                 <!-- Card 4 -->
-                <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition duration-300">
-                    <div class="w-12 h-12 bg-potiguar/10 rounded-full flex items-center justify-center mb-4 text-potiguar text-2xl"><i class="fas fa-money-bill-wave"></i></div>
-                    <h3 class="font-bold text-lg mb-2">Condições Especiais</h3>
-                    <p class="text-sm text-gray-600">Parcelamento e condições de pagamento exclusivas para o VIP.</p>
+                <div class="group bg-gray-50 p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-potiguar/30 transition duration-300">
+                    <div class="w-14 h-14 bg-potiguar/10 rounded-2xl flex items-center justify-center mb-6 text-potiguar text-2xl group-hover:scale-110 transition duration-300"><i class="fas fa-money-bill-wave"></i></div>
+                    <h3 class="font-bold text-xl mb-3 text-gray-900">Condições Especiais</h3>
+                    <p class="text-gray-600 leading-relaxed">Parcelamento e condições de pagamento exclusivas para o VIP.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FORMULÁRIO DE CAPTURA -->
-    <section id="cadastro" class="py-16 bg-gradient-to-br from-gray-100 to-gray-200">
+    <section id="cadastro" class="py-20 bg-gradient-to-br from-blue-50 to-white">
         <div class="container mx-auto px-4">
-            <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
-                <div class="bg-dark-900 p-6 text-center border-b-4 border-potiguar">
-                    <h2 class="text-2xl font-bold text-white uppercase">Garantir minha Vaga</h2>
-                    <p class="text-gray-400 text-sm mt-1">Preencha para receber o link do grupo</p>
+            <div class="max-w-2xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+                <div class="bg-dark-900 p-8 text-center border-b-8 border-potiguar">
+                    <h2 class="text-2xl md:text-3xl font-bold text-white uppercase tracking-wide">Garantir minha Vaga</h2>
+                    <p class="text-potiguar-light text-sm mt-2 font-medium">Preencha para receber o link do grupo</p>
                 </div>
 
-                <div class="p-8 relative">
-                    <!-- Overlay de Sucesso (Oculto inicialmente) -->
+                <div class="p-8 md:p-10 relative">
+                    <!-- Overlay de Sucesso -->
                     <div id="successMessage" class="hidden absolute inset-0 bg-white z-20 flex-col items-center justify-center text-center p-8">
-                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-4 text-green-600 text-4xl animate-bounce">
+                        <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mb-6 text-green-600 text-5xl animate-bounce">
                             <i class="fas fa-check"></i>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Cadastro Confirmado!</h3>
-                        <p class="text-gray-600 mb-6">Seus dados foram recebidos com sucesso. Em breve você receberá o link do grupo.</p>
-                        <a href="#" class="btn-gradient bg-potiguar text-white px-6 py-3 rounded-lg font-bold hover:bg-potiguar-dark transition">
-                            <i class="fab fa-whatsapp mr-2"></i> Falar no WhatsApp
+                        <h3 class="text-3xl font-bold text-gray-900 mb-2">Cadastro Confirmado!</h3>
+                        <p class="text-gray-600 mb-8 max-w-sm mx-auto">Seus dados foram recebidos com sucesso. Em breve você receberá o link do grupo.</p>
+                        <a href="#" class="w-full max-w-xs btn-gradient bg-potiguar text-white px-6 py-4 rounded-xl font-bold hover:bg-potiguar-dark transition shadow-lg flex items-center justify-center gap-2">
+                            <i class="fab fa-whatsapp text-2xl"></i> Falar no WhatsApp
                         </a>
                     </div>
 
@@ -173,85 +196,91 @@
                         <!-- Campos de Texto -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div class="col-span-2">
-                                <label class="block text-sm font-semibold text-gray-700 mb-1">Nome Completo</label>
-                                <div class="relative">
-                                    <span class="absolute left-3 top-3 text-gray-400"><i class="fas fa-user"></i></span>
-                                    <input type="text" name="nome" required class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-potiguar outline-none transition" placeholder="Seu nome">
+                                <label class="block text-sm font-bold text-gray-700 mb-2 ml-1">Nome Completo</label>
+                                <div class="relative group">
+                                    <span class="absolute left-4 top-3.5 text-gray-400 group-focus-within:text-potiguar transition"><i class="fas fa-user"></i></span>
+                                    <input type="text" name="nome" required class="w-full pl-12 pr-4 py-3.5 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:ring-2 focus:ring-potiguar focus:border-transparent outline-none transition" placeholder="Digite seu nome">
                                 </div>
                             </div>
 
                             <div class="col-span-2 md:col-span-1">
-                                <label class="block text-sm font-semibold text-gray-700 mb-1">WhatsApp</label>
-                                <div class="relative">
-                                    <span class="absolute left-3 top-3 text-green-500"><i class="fab fa-whatsapp"></i></span>
-                                    <input type="tel" name="whatsapp" required class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-potiguar outline-none transition" placeholder="(99) 99999-9999">
+                                <label class="block text-sm font-bold text-gray-700 mb-2 ml-1">WhatsApp</label>
+                                <div class="relative group">
+                                    <span class="absolute left-4 top-3.5 text-green-500"><i class="fab fa-whatsapp"></i></span>
+                                    <input type="tel" name="whatsapp" required class="w-full pl-12 pr-4 py-3.5 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:ring-2 focus:ring-potiguar focus:border-transparent outline-none transition" placeholder="(99) 99999-9999">
                                 </div>
                             </div>
 
-                            <!-- Campo Endereço -->
                             <div class="col-span-2 md:col-span-1">
-                                <label class="block text-sm font-semibold text-gray-700 mb-1">Endereço (Rua/Nº)</label>
-                                <div class="relative">
-                                    <span class="absolute left-3 top-3 text-gray-400"><i class="fas fa-home"></i></span>
-                                    <input type="text" name="endereco" required class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-potiguar outline-none transition" placeholder="Rua das Flores, 123">
+                                <label class="block text-sm font-bold text-gray-700 mb-2 ml-1">Endereço (Rua/Nº)</label>
+                                <div class="relative group">
+                                    <span class="absolute left-4 top-3.5 text-gray-400 group-focus-within:text-potiguar transition"><i class="fas fa-home"></i></span>
+                                    <input type="text" name="endereco" required class="w-full pl-12 pr-4 py-3.5 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:ring-2 focus:ring-potiguar focus:border-transparent outline-none transition" placeholder="Rua das Flores, 123">
                                 </div>
                             </div>
 
                             <div class="col-span-2">
-                                <label class="block text-sm font-semibold text-gray-700 mb-1">Bairro</label>
-                                <div class="relative">
-                                    <span class="absolute left-3 top-3 text-gray-400"><i class="fas fa-map-marker-alt"></i></span>
-                                    <input type="text" name="bairro" required class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-potiguar outline-none transition" placeholder="Onde você mora?">
+                                <label class="block text-sm font-bold text-gray-700 mb-2 ml-1">Bairro</label>
+                                <div class="relative group">
+                                    <span class="absolute left-4 top-3.5 text-gray-400 group-focus-within:text-potiguar transition"><i class="fas fa-map-marker-alt"></i></span>
+                                    <input type="text" name="bairro" required class="w-full pl-12 pr-4 py-3.5 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:ring-2 focus:ring-potiguar focus:border-transparent outline-none transition" placeholder="Onde você mora?">
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Origem (Mapeado para 'cliente' no script) -->
+                        <!-- Origem -->
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-1">Já é cliente Potiguar?</label>
-                            <select name="cliente" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-potiguar outline-none bg-white">
-                                <option value="" disabled selected>Selecione uma opção...</option>
-                                <option value="Sim, ja sou cliente">Sim, já sou cliente</option>
-                                <option value="Nao, primeira vez">Não, primeira vez</option>
-                                <option value="Indicacao">Indicação de amigo</option>
-                                <option value="Instagram/Facebook">Vi no Instagram/Facebook</option>
-                                <option value="Google">Achei no Google</option>
-                            </select>
+                            <label class="block text-sm font-bold text-gray-700 mb-2 ml-1">Já é cliente Potiguar?</label>
+                            <div class="relative">
+                                <select name="cliente" required class="w-full pl-4 pr-10 py-3.5 border border-gray-200 rounded-xl bg-gray-50 focus:bg-white focus:ring-2 focus:ring-potiguar focus:border-transparent outline-none appearance-none transition">
+                                    <option value="" disabled selected>Selecione uma opção...</option>
+                                    <option value="Sim, ja sou cliente">Sim, já sou cliente</option>
+                                    <option value="Nao, primeira vez">Não, primeira vez</option>
+                                    <option value="Indicacao">Indicação de amigo</option>
+                                    <option value="Instagram/Facebook">Vi no Instagram/Facebook</option>
+                                    <option value="Google">Achei no Google</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-500">
+                                    <i class="fas fa-chevron-down text-xs"></i>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Interesse (Ouro) -->
-                        <div class="bg-orange-50 p-5 rounded-xl border border-orange-200">
-                            <label class="block text-base font-bold text-potiguar-dark mb-3 text-center">
-                                <i class="fas fa-bullseye mr-1"></i> O que você tem mais interesse hoje?
+                        <div class="bg-blue-50/50 p-6 rounded-2xl border border-blue-100">
+                            <label class="block text-lg font-bold text-potiguar-dark mb-4 text-center">
+                                <i class="fas fa-bullseye mr-2"></i> O que você tem mais interesse hoje?
                             </label>
-                            <div class="grid grid-cols-2 gap-3">
-                                <label class="flex items-center space-x-3 bg-white p-3 rounded-lg border border-gray-200 cursor-pointer hover:border-potiguar transition">
-                                    <input type="checkbox" name="interesse" value="Eletrodomesticos" class="w-5 h-5 text-potiguar rounded">
-                                    <span class="text-sm font-medium text-gray-700">Eletrodomésticos</span>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <label class="flex items-center space-x-3 bg-white p-4 rounded-xl border border-gray-200 cursor-pointer hover:border-potiguar hover:shadow-md transition group">
+                                    <input type="checkbox" name="interesse" value="Eletrodomesticos" class="w-5 h-5 text-potiguar rounded border-gray-300 focus:ring-potiguar">
+                                    <span class="text-sm font-semibold text-gray-700 group-hover:text-potiguar transition">Eletrodomésticos</span>
                                 </label>
-                                <label class="flex items-center space-x-3 bg-white p-3 rounded-lg border border-gray-200 cursor-pointer hover:border-potiguar transition">
-                                    <input type="checkbox" name="interesse" value="Moveis" class="w-5 h-5 text-potiguar rounded">
-                                    <span class="text-sm font-medium text-gray-700">Móveis</span>
+                                <label class="flex items-center space-x-3 bg-white p-4 rounded-xl border border-gray-200 cursor-pointer hover:border-potiguar hover:shadow-md transition group">
+                                    <input type="checkbox" name="interesse" value="Moveis" class="w-5 h-5 text-potiguar rounded border-gray-300 focus:ring-potiguar">
+                                    <span class="text-sm font-semibold text-gray-700 group-hover:text-potiguar transition">Móveis</span>
                                 </label>
-                                <label class="flex items-center space-x-3 bg-white p-3 rounded-lg border border-gray-200 cursor-pointer hover:border-potiguar transition">
-                                    <input type="checkbox" name="interesse" value="TV e Eletronicos" class="w-5 h-5 text-potiguar rounded">
-                                    <span class="text-sm font-medium text-gray-700">TV e Eletrônicos</span>
+                                <label class="flex items-center space-x-3 bg-white p-4 rounded-xl border border-gray-200 cursor-pointer hover:border-potiguar hover:shadow-md transition group">
+                                    <input type="checkbox" name="interesse" value="TV e Eletronicos" class="w-5 h-5 text-potiguar rounded border-gray-300 focus:ring-potiguar">
+                                    <span class="text-sm font-semibold text-gray-700 group-hover:text-potiguar transition">TV e Eletrônicos</span>
                                 </label>
-                                <label class="flex items-center space-x-3 bg-white p-3 rounded-lg border border-gray-200 cursor-pointer hover:border-potiguar transition">
-                                    <input type="checkbox" name="interesse" value="Tudo / Promocoes" class="w-5 h-5 text-potiguar rounded">
-                                    <span class="text-sm font-medium text-gray-700">Tudo / Promoções</span>
+                                <label class="flex items-center space-x-3 bg-white p-4 rounded-xl border border-gray-200 cursor-pointer hover:border-potiguar hover:shadow-md transition group">
+                                    <input type="checkbox" name="interesse" value="Tudo / Promocoes" class="w-5 h-5 text-potiguar rounded border-gray-300 focus:ring-potiguar">
+                                    <span class="text-sm font-semibold text-gray-700 group-hover:text-potiguar transition">Tudo / Promoções</span>
                                 </label>
                             </div>
                         </div>
 
-                        <div class="flex items-start gap-2 bg-gray-50 p-3 rounded text-xs text-gray-500">
-                            <i class="fas fa-lock text-green-600 mt-1"></i>
-                            <p>Seus dados estão 100% seguros conforme a <strong>LGPD</strong>.</p>
+                        <div class="flex items-center gap-3 bg-gray-50 p-4 rounded-xl text-xs text-gray-500 border border-gray-100">
+                            <i class="fas fa-shield-alt text-2xl text-green-500"></i>
+                            <p class="leading-tight">Seus dados estão 100% seguros. Respeitamos sua privacidade conforme a <strong>LGPD</strong>.</p>
                         </div>
 
                         <!-- Botão Submit -->
-                        <button id="submitBtn" type="submit" class="w-full pulse-btn bg-green-600 hover:bg-green-700 text-white font-extrabold text-xl py-4 rounded-xl shadow-lg transition duration-300 flex items-center justify-center gap-2 uppercase tracking-wide">
-                            <span id="btnText"><i class="fab fa-whatsapp text-2xl"></i> Entrar no Grupo Agora</span>
+                        <button id="submitBtn" type="submit" class="w-full pulse-btn bg-green-600 hover:bg-green-700 text-white font-extrabold text-xl py-4 rounded-xl shadow-lg transition duration-300 flex items-center justify-center gap-3 uppercase tracking-wide group">
+                            <span id="btnText" class="flex items-center gap-2">
+                                <i class="fab fa-whatsapp text-2xl group-hover:scale-110 transition"></i> Entrar no Grupo Agora
+                            </span>
                             <span id="btnLoader" class="loader hidden"></span>
                         </button>
                         <p class="text-center text-xs text-gray-400 mt-2">Você receberá o convite em até 24 horas.</p>
@@ -262,11 +291,16 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-black text-white py-8 border-t border-gray-800 text-center">
-        <p class="text-gray-500 text-sm">© 2024 Potiguar Eletro.</p>
+    <footer class="bg-black text-white py-10 border-t-2 border-gray-900">
+        <div class="container mx-auto px-4 text-center">
+            <img src="https://raw.githubusercontent.com/gilneilaurindo/Grupo-VIP/main/LOGO%20POTIGUAR.png" 
+                 alt="Logo Footer" 
+                 class="h-10 mx-auto mb-6 opacity-80 brightness-0 invert">
+            <p class="text-gray-500 text-sm">© 2024 Potiguar Eletro. Todos os direitos reservados.</p>
+        </div>
     </footer>
 
-    <!-- SCRIPT DE ENVIO ATUALIZADO (ROBUSTO) -->
+    <!-- SCRIPT DE ENVIO CORRIGIDO E OTIMIZADO -->
     <script>
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzgA7TpflLhKFqhYWvWi51U3PBgdJU0CrRLACVbSI23hqlpYkxN7I2uc8kQ6lWFRvri1w/exec';
 
@@ -279,54 +313,62 @@
         form.addEventListener('submit', e => {
             e.preventDefault();
             
+            // 1. Validação do Campo Ouro (Interesses)
+            // Se o usuário não marcar nada, não enviamos.
+            const checkboxes = document.querySelectorAll('input[name="interesse"]:checked');
+            const interessesSelecionados = Array.from(checkboxes).map(cb => cb.value).join(', ');
+
+            if (!interessesSelecionados) {
+                alert('Por favor, selecione pelo menos um interesse (Eletrodomésticos, Móveis, etc).');
+                // Garante que o botão não trave se já tiver sido clicado antes
+                return;
+            }
+
             // UI de carregamento
             submitBtn.disabled = true;
             btnText.textContent = "Enviando...";
             btnLoader.classList.remove('hidden');
 
-            // Captura dados do formulário manualmente para segurança
+            // Captura dados do formulário
             const formData = new FormData(form);
             const data = new URLSearchParams();
 
-            // Adiciona campos de texto explicitamente
             data.append('nome', formData.get('nome'));
             data.append('whatsapp', formData.get('whatsapp'));
             data.append('endereco', formData.get('endereco'));
             data.append('bairro', formData.get('bairro'));
             data.append('cliente', formData.get('cliente'));
-            data.append('origem', formData.get('origem') || 'LP Padrão'); // Garante que a origem vá
+            data.append('origem', formData.get('origem') || 'LP Cadastro');
+            data.append('interesse', interessesSelecionados);
 
-            // Tratamento especial para Checkboxes (Interesses)
-            const checkboxes = document.querySelectorAll('input[name="interesse"]:checked');
-            const interessesSelecionados = Array.from(checkboxes).map(cb => cb.value).join(', ');
-            
-            if (interessesSelecionados) {
-                data.append('interesse', interessesSelecionados);
-            } else {
-                data.append('interesse', 'Nenhum'); 
-            }
+            console.log("Enviando...");
 
-            console.log("Enviando dados:", data.toString()); // Depuração no console
-
-            // Envio Otimizado para Apps Script
+            // 2. Fetch Correto (sem no-cors)
+            // Agora conseguimos ler se o Apps Script retornou "OK" ou erro.
             fetch(SCRIPT_URL, {
                 method: 'POST',
-                body: data,
-                mode: 'no-cors'
+                body: data
             })
-            .then(response => {
+            .then(res => res.text()) // Converte a resposta para texto
+            .then(text => {
+                // O script retorna "OK" se der tudo certo
+                if (text !== 'OK') {
+                    throw new Error(text); // Força erro se não for OK
+                }
+
                 // Sucesso!
-                console.log("Sucesso (no-cors mode)");
                 successMessage.classList.remove('hidden');
                 successMessage.classList.add('flex');
                 form.classList.add('hidden');
                 document.getElementById('cadastro').scrollIntoView({ behavior: 'smooth' });
             })
             .catch(error => {
-                console.error('Erro no fetch!', error);
-                alert('Erro na conexão. Verifique se o Script está implantado como "Qualquer pessoa" (Anyone).');
+                console.error('Erro no envio:', error);
+                alert('Ocorreu um erro ao enviar. Tente novamente ou chame no WhatsApp.');
+                
+                // Reseta o botão para permitir nova tentativa
                 submitBtn.disabled = false;
-                btnText.textContent = "Tentar Novamente";
+                btnText.innerHTML = '<i class="fab fa-whatsapp text-2xl"></i> Tentar Novamente';
                 btnLoader.classList.add('hidden');
             });
         });

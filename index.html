@@ -167,6 +167,9 @@
                     <!-- Formulário -->
                     <form id="vipForm" class="space-y-6">
                         
+                        <!-- Campo Oculto ORIGEM -->
+                        <input type="hidden" name="origem" value="LP Cadastro">
+
                         <!-- Campos de Texto -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div class="col-span-2">
@@ -185,7 +188,7 @@
                                 </div>
                             </div>
 
-                            <!-- ADICIONADO: Campo Endereço (Requerido pelo script) -->
+                            <!-- Campo Endereço -->
                             <div class="col-span-2 md:col-span-1">
                                 <label class="block text-sm font-semibold text-gray-700 mb-1">Endereço (Rua/Nº)</label>
                                 <div class="relative">
@@ -265,7 +268,6 @@
 
     <!-- SCRIPT DE ENVIO ATUALIZADO (ROBUSTO) -->
     <script>
-        // 🚨 ATENÇÃO: URL atualizada conforme solicitado
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzgA7TpflLhKFqhYWvWi51U3PBgdJU0CrRLACVbSI23hqlpYkxN7I2uc8kQ6lWFRvri1w/exec';
 
         const form = document.getElementById('vipForm');
@@ -282,46 +284,47 @@
             btnText.textContent = "Enviando...";
             btnLoader.classList.remove('hidden');
 
-            // Captura dados do formulário
-            const rawFormData = new FormData(form);
+            // Captura dados do formulário manualmente para segurança
+            const formData = new FormData(form);
             const data = new URLSearchParams();
 
-            // Processa campos normais
-            for (const pair of rawFormData) {
-                if (pair[0] !== 'interesse') { // Ignora checkbox aqui para tratar depois
-                    data.append(pair[0], pair[1]);
-                }
-            }
+            // Adiciona campos de texto explicitamente
+            data.append('nome', formData.get('nome'));
+            data.append('whatsapp', formData.get('whatsapp'));
+            data.append('endereco', formData.get('endereco'));
+            data.append('bairro', formData.get('bairro'));
+            data.append('cliente', formData.get('cliente'));
+            data.append('origem', formData.get('origem') || 'LP Padrão'); // Garante que a origem vá
 
             // Tratamento especial para Checkboxes (Interesses)
-            // Junta todos os marcados com uma vírgula (Ex: "Móveis, TV")
             const checkboxes = document.querySelectorAll('input[name="interesse"]:checked');
             const interessesSelecionados = Array.from(checkboxes).map(cb => cb.value).join(', ');
             
             if (interessesSelecionados) {
                 data.append('interesse', interessesSelecionados);
             } else {
-                // Se nada for marcado, evita erro no script
                 data.append('interesse', 'Nenhum'); 
             }
+
+            console.log("Enviando dados:", data.toString()); // Depuração no console
 
             // Envio Otimizado para Apps Script
             fetch(SCRIPT_URL, {
                 method: 'POST',
-                body: data, // Envia formato URL-Encoded (mais seguro para esse script)
+                body: data,
                 mode: 'no-cors'
             })
             .then(response => {
                 // Sucesso!
+                console.log("Sucesso (no-cors mode)");
                 successMessage.classList.remove('hidden');
                 successMessage.classList.add('flex');
                 form.classList.add('hidden');
-                // Rola a página para cima suavemente para ver a mensagem
                 document.getElementById('cadastro').scrollIntoView({ behavior: 'smooth' });
             })
             .catch(error => {
-                console.error('Erro!', error.message);
-                alert('Ocorreu um erro ao conectar com a planilha. Verifique se o Script foi implantado como "Qualquer pessoa" (Anyone).');
+                console.error('Erro no fetch!', error);
+                alert('Erro na conexão. Verifique se o Script está implantado como "Qualquer pessoa" (Anyone).');
                 submitBtn.disabled = false;
                 btnText.textContent = "Tentar Novamente";
                 btnLoader.classList.add('hidden');

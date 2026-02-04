@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TZPL0QW8MG"></script>2026
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TZPL0QW8MG"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -13,6 +13,24 @@
       gtag('config', 'G-TZPL0QW8MG');
     </script>
     
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1417765869991950');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1417765869991950&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
     <!-- META TAGS OTIMIZADAS PARA REDES SOCIAIS -->
     <title>Grupo VIP Potiguar Eletro - Convite Exclusivo</title>
     <meta name="description" content="Entre para o Grupo VIP da Potiguar Eletro e receba ofertas exclusivas, descontos relâmpago e lançamentos antes de todo mundo.">
@@ -154,12 +172,10 @@
 
                 <div class="lg:w-1/2 w-full">
                     <div class="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-800 bg-black group transform hover:scale-[1.01] transition duration-500">
-                        <!-- Iframe do Google Drive (Método Estável) -->
-                        <!-- Adicionei scale-[1.02] para cortar levemente as bordas pretas do player -->
+                        <!-- Iframe do Google Drive -->
                         <iframe class="w-full h-full transform scale-[1.02]" src="https://drive.google.com/file/d/1joMmnaytUroXeoZMlwQohuptoycloUmA/preview" title="Vídeo Promocional" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         
-                        <!-- CAMADA DE BLOQUEIO (MÁSCARA INVISÍVEL) -->
-                        <!-- Essa div cobre o botão "Pop-out" do Drive para ninguém clicar -->
+                        <!-- CAMADA DE BLOQUEIO -->
                         <div class="absolute top-0 right-0 w-24 h-24 z-50 bg-transparent cursor-default"></div>
 
                         <!-- Borda decorativa -->
@@ -208,7 +224,7 @@
         </div>
     </section>
 
-    <!-- FORMULÁRIO DE CAPTURA (Estilo Tradicional Integrado) -->
+    <!-- FORMULÁRIO DE CAPTURA -->
     <section id="cadastro" class="py-12 lg:py-20 bg-gradient-to-br from-blue-50 to-white">
         <div class="container mx-auto px-4">
             <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-100">
@@ -367,6 +383,11 @@
                 mode: 'no-cors' 
             })
             .then(() => {
+                // Dispara o evento de Lead para o Pixel quando o envio funciona
+                if(typeof fbq !== 'undefined') {
+                    fbq('track', 'Lead');
+                }
+
                 successMessage.classList.remove('hidden');
                 successMessage.classList.add('flex');
                 form.classList.add('hidden');

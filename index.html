@@ -332,22 +332,26 @@
             e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
         });
 
-        // Inteligência Avançada (Retorna apenas os IDs dos grupos)
-        function obterCodigoDoGrupo(endereco, bairro) {
+        // Inteligência Avançada - URL COMPLETAS PARA EVITAR FALHAS DE LEITURA DO NAVEGADOR
+        function obterLinkDoGrupo(endereco, bairro) {
             const loc = (endereco + " " + bairro).toLowerCase();
             
-            if (loc.includes("pereiro")) return 'DfrhmCsFVbR3nlzB68q0bO';
-            if (loc.includes("severiano")) return 'DqdXJJxU24IIHqGlSq0sGa';
-            if (loc.includes("venha")) return 'Iqin7d3t7PW98CjhYKTepv';
-            if (loc.includes("coronel") || loc.includes("pessoa")) return 'lleq2tjy6s71JbfucjVfJV';
-            if (loc.includes("encanto")) return 'Ee39UHNPqdO4XJNSnMmtqV';
+            if (loc.includes("pereiro")) return 'https://chat.whatsapp.com/DfrhmCsFVbR3nlzB68q0bO?mode=qi_t';
+            if (loc.includes("severiano")) return 'https://chat.whatsapp.com/DqdXJJxU24IIHqGlSq0sGa?mode=qi_t';
+            if (loc.includes("venha")) return 'https://chat.whatsapp.com/Iqin7d3t7PW98CjhYKTepv?mode=qi_t';
+            if (loc.includes("coronel") || loc.includes("pessoa")) return 'https://chat.whatsapp.com/lleq2tjy6s71JbfucjVfJV?mode=qi_t';
+            if (loc.includes("encanto")) return 'https://chat.whatsapp.com/Ee39UHNPqdO4XJNSnMmtqV?mode=qi_t';
             
             if (loc.includes("sítio") || loc.includes("sitio") || loc.includes("rural") || loc.includes("fazenda")) {
-                return Math.random() > 0.5 ? 'CKmlGgsLF9s8hxKXSxWSHD' : 'KX4a4Zqm07AFF6fZlfyf5p';
+                return Math.random() > 0.5 
+                    ? 'https://chat.whatsapp.com/CKmlGgsLF9s8hxKXSxWSHD?mode=qi_t' 
+                    : 'https://chat.whatsapp.com/KX4a4Zqm07AFF6fZlfyf5p?mode=qi_t';
             }
-            if (loc.includes("centro")) return 'LZEqORjPmXD2Fbl7Ce0IWj';
+            if (loc.includes("centro")) return 'https://chat.whatsapp.com/LZEqORjPmXD2Fbl7Ce0IWj?mode=qi_t';
             
-            return (loc.length % 2 === 0) ? 'L0Ykw6Xz6ZGLOmVAZaw42c' : 'GNjBFvEY4PgCbGyEmMEbuj';
+            return (loc.length % 2 === 0) 
+                ? 'https://chat.whatsapp.com/L0Ykw6Xz6ZGLOmVAZaw42c?mode=qi_t' 
+                : 'https://chat.whatsapp.com/GNjBFvEY4PgCbGyEmMEbuj?mode=qi_t';
         }
 
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx8swlEMNhx6NdK7s5wGBSD2Oc91DCAzDQw8Fvz23uezdABdCYOpHJbQGNvps4bHjuz4w/exec';
@@ -360,7 +364,6 @@
         form.addEventListener('submit', e => {
             e.preventDefault();
             
-            // Validação de Interesses
             const checkboxes = document.querySelectorAll('input[name="interesse"]:checked');
             const interessesSelecionados = Array.from(checkboxes).map(cb => cb.value).join(', ');
 
@@ -369,12 +372,10 @@
                 return;
             }
 
-            // UI de carregamento
             submitBtn.disabled = true;
-            btnText.textContent = "A entrar no WhatsApp...";
+            btnText.textContent = "A abrir WhatsApp...";
             btnLoader.classList.remove('hidden');
 
-            // Captura dados
             const formData = new FormData(form);
             const data = new URLSearchParams();
 
@@ -389,44 +390,45 @@
             data.append('origem', formData.get('origem')); 
             data.append('interesse', interessesSelecionados);
 
-            const codigoGrupo = obterCodigoDoGrupo(enderecoDigitado, bairroDigitado);
-            
-            // O "?mode=qi_t" foi adicionado de volta. 
-            // O WhatsApp precisa disso para validar este tipo de link de convite!
-            const linkOficial = 'https://chat.whatsapp.com/' + codigoGrupo + '?mode=qi_t';
+            // Obtém o link exato e completo
+            const linkOficial = obterLinkDoGrupo(enderecoDigitado, bairroDigitado);
 
-            // Função que executa o redirecionamento
+            // Redirecionamento blindado usando um clique fantasma HTML (Imita o clique real de uma pessoa)
             let redirecionado = false;
             const irParaWhatsApp = () => {
                 if (!redirecionado) {
                     redirecionado = true;
-                    // O redirecionamento usa '_top' por segurança caso esteja no Instagram/Facebook
-                    window.top.location.href = linkOficial; 
+                    
+                    let a = document.createElement('a');
+                    a.href = linkOficial;
+                    a.target = '_top'; 
+                    document.body.appendChild(a);
+                    a.click(); // Força o telemóvel a abrir a aplicação sem erro de Javascript
+                    
+                    // Fallback extra
+                    setTimeout(() => {
+                        window.top.location.href = linkOficial; 
+                    }, 500);
                 }
             };
 
-            // Envia os dados para a planilha em background
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 body: data,
                 mode: 'no-cors' 
             })
             .then(() => {
-                // Dispara o evento de Lead para o Pixel
                 if(typeof fbq !== 'undefined') { fbq('track', 'Lead'); }
                 irParaWhatsApp();
             })
             .catch(error => {
-                console.error('Erro na planilha, mas enviando cliente para o grupo mesmo assim:', error);
-                irParaWhatsApp(); // Garante a entrada no grupo mesmo se a internet falhar ao enviar para a planilha
+                console.error('Erro na planilha, mas vai para o grupo:', error);
+                irParaWhatsApp();
             });
 
-            // GATILHO DE SEGURANÇA: Se a planilha demorar mais de 1.5 segundos para responder, 
-            // manda a pessoa para o grupo automaticamente para não a deixar esperando.
             setTimeout(() => {
                 irParaWhatsApp();
             }, 1500);
-            
         });
     </script>
 

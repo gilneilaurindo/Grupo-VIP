@@ -242,7 +242,7 @@
                         </div>
                         <h3 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Cadastro realizado com sucesso!</h3>
                         <p class="text-gray-600 mb-8 max-w-sm mx-auto">Em breve você receberá o convite para o grupo.</p>
-                        <!-- O link será injetado neste botão dinamicamente, garantindo que não há bloqueio de navegador -->
+                        <!-- Removido o target="_blank" para forçar a abertura da aplicação no telemóvel -->
                         <a href="#" id="wppGroupLink" class="w-full max-w-xs btn-gradient bg-potiguar text-white px-6 py-4 rounded-xl font-bold hover:bg-potiguar-dark transition shadow-lg flex items-center justify-center gap-2 text-center">
                             <i class="fab fa-whatsapp text-2xl"></i> Entrar no Grupo VIP
                         </a>
@@ -338,31 +338,26 @@
 
     <!-- SCRIPTS DE COMPORTAMENTO E ENVIO -->
     <script>
-        // Inteligência Geográfica para apontar para o grupo de WhatsApp correto
-        function defineGrupoWhatsapp(endereco, bairro) {
+        // Inteligência Avançada + Sistema Anti-Bloqueio de WebViews (Instagram/Facebook)
+        function obterCodigoDoGrupo(endereco, bairro) {
             const loc = (endereco + " " + bairro).toLowerCase();
             
-            // Cidades Vizinhas
-            if (loc.includes("pereiro")) return 'https://chat.whatsapp.com/DfrhmCsFVbR3nlzB68q0bO?mode=qi_t';
-            if (loc.includes("severiano")) return 'https://chat.whatsapp.com/DqdXJJxU24IIHqGlSq0sGa?mode=qi_t';
-            if (loc.includes("venha")) return 'https://chat.whatsapp.com/Iqin7d3t7PW98CjhYKTepv?mode=qi_t';
-            if (loc.includes("coronel") || loc.includes("pessoa")) return 'https://chat.whatsapp.com/lleq2tjy6s71JbfucjVfJV?mode=qi_t';
-            if (loc.includes("encanto")) return 'https://chat.whatsapp.com/Ee39UHNPqdO4XJNSnMmtqV?mode=qi_t';
+            // Cidades Vizinhas (Retorna apenas o CÓDIGO de convite)
+            if (loc.includes("pereiro")) return 'DfrhmCsFVbR3nlzB68q0bO';
+            if (loc.includes("severiano")) return 'DqdXJJxU24IIHqGlSq0sGa';
+            if (loc.includes("venha")) return 'Iqin7d3t7PW98CjhYKTepv';
+            if (loc.includes("coronel") || loc.includes("pessoa")) return 'lleq2tjy6s71JbfucjVfJV';
+            if (loc.includes("encanto")) return 'Ee39UHNPqdO4XJNSnMmtqV';
             
             // Região de São Miguel / RN e Zonas Rurais
             if (loc.includes("sítio") || loc.includes("sitio") || loc.includes("rural") || loc.includes("fazenda")) {
-                // Distribui aleatoriamente entre Zona Rural 01 e Zona Rural 02 para balancear os grupos
-                return Math.random() > 0.5 
-                    ? 'https://chat.whatsapp.com/CKmlGgsLF9s8hxKXSxWSHD?mode=qi_t'
-                    : 'https://chat.whatsapp.com/KX4a4Zqm07AFF6fZlfyf5p?mode=qi_t';
+                return Math.random() > 0.5 ? 'CKmlGgsLF9s8hxKXSxWSHD' : 'KX4a4Zqm07AFF6fZlfyf5p';
             }
             
-            if (loc.includes("centro")) return 'https://chat.whatsapp.com/LZEqORjPmXD2Fbl7Ce0IWj?mode=qi_t';
+            if (loc.includes("centro")) return 'LZEqORjPmXD2Fbl7Ce0IWj';
             
-            // Padrão: Se for um bairro não identificado, distribui pelo tamanho da string gerando balanceamento (Bairro 01 ou 02)
-            return (loc.length % 2 === 0) 
-                ? 'https://chat.whatsapp.com/L0Ykw6Xz6ZGLOmVAZaw42c?mode=qi_t'
-                : 'https://chat.whatsapp.com/GNjBFvEY4PgCbGyEmMEbuj?mode=qi_t';
+            // Padrão: Bairro 01 ou 02 (distribuído de forma equilibrada)
+            return (loc.length % 2 === 0) ? 'L0Ykw6Xz6ZGLOmVAZaw42c' : 'GNjBFvEY4PgCbGyEmMEbuj';
         }
 
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx8swlEMNhx6NdK7s5wGBSD2Oc91DCAzDQw8Fvz23uezdABdCYOpHJbQGNvps4bHjuz4w/exec';
@@ -372,7 +367,6 @@
         const btnText = document.getElementById('btnText');
         const btnLoader = document.getElementById('btnLoader');
         const successMessage = document.getElementById('successMessage');
-        const wppGroupLink = document.getElementById('wppGroupLink');
 
         form.addEventListener('submit', e => {
             e.preventDefault();
@@ -412,27 +406,45 @@
                 mode: 'no-cors' 
             })
             .then(() => {
-                // Dispara o evento de Lead para o Pixel quando o envio funciona
-                if(typeof fbq !== 'undefined') {
-                    fbq('track', 'Lead');
-                }
+                // Dispara o evento de Lead para o Pixel
+                if(typeof fbq !== 'undefined') { fbq('track', 'Lead'); }
 
-                // Aplica a lógica Inteligente do link baseado no endereço preenchido
-                const linkCorreto = defineGrupoWhatsapp(enderecoDigitado, bairroDigitado);
+                const codigoGrupo = obterCodigoDoGrupo(enderecoDigitado, bairroDigitado);
+                const linkOficial = 'https://chat.whatsapp.com/' + codigoGrupo;
                 
-                // Anexa o link no botão final "Entrar no Grupo VIP" (Dessa forma contorna os bloqueios de navegador celular)
-                if (wppGroupLink) {
-                    wppGroupLink.href = linkCorreto;
-                }
+                // Recria o botão para injetar o novo comportamento sem acumular bugs
+                let btnWppVelho = document.getElementById('wppGroupLink');
+                let btnWppNovo = btnWppVelho.cloneNode(true);
+                btnWppVelho.parentNode.replaceChild(btnWppNovo, btnWppVelho);
+                
+                btnWppNovo.href = linkOficial;
+                btnWppNovo.target = '_blank';
+                
+                // LÓGICA DE PROGRAMADOR SENIOR: Deep Link Forçando abertura do App
+                btnWppNovo.addEventListener('click', function(event) {
+                    const isAndroid = /Android/i.test(navigator.userAgent);
+                    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+                    
+                    if (isAndroid) {
+                        event.preventDefault(); // Impede o navegador de abrir o link padrão
+                        // Intent nativo do Android forçando a abertura direta do aplicativo WhatsApp
+                        window.location.href = 'intent://chat.whatsapp.com/' + codigoGrupo + '#Intent;scheme=https;package=com.whatsapp;end';
+                        // Fallback salva-vidas se o app falhar ao abrir
+                        setTimeout(() => { window.location.href = linkOficial; }, 2000);
+                    } else if (isIOS) {
+                        event.preventDefault();
+                        // URL Scheme nativo do iOS
+                        window.location.href = 'whatsapp://chat?code=' + codigoGrupo;
+                        setTimeout(() => { window.location.href = linkOficial; }, 2000);
+                    }
+                    // Se for no Computador, ele ignora os de cima e abre a página padrão normalmente
+                });
 
-                // Mostra mensagem de sucesso
+                // Mostra a mensagem de sucesso
                 successMessage.classList.remove('hidden');
                 successMessage.classList.add('flex');
                 form.classList.add('hidden');
                 document.getElementById('cadastro').scrollIntoView({ behavior: 'smooth' });
-
-                // Tentativa de redirecionamento imediato (sem _blank para aumentar taxa de sucesso)
-                window.location.href = linkCorreto;
             })
             .catch(error => {
                 console.error('Erro no envio:', error);

@@ -384,7 +384,10 @@
             data.append('interesse', interessesSelecionados);
 
             const codigoGrupo = obterCodigoDoGrupo(enderecoDigitado, bairroDigitado);
-            const linkOficial = 'https://chat.whatsapp.com/' + codigoGrupo;
+            
+            // AQUI ESTÁ A CORREÇÃO: O "?mode=qi_t" foi adicionado de volta. 
+            // O WhatsApp precisa disso para validar este tipo de link de convite!
+            const linkOficial = 'https://chat.whatsapp.com/' + codigoGrupo + '?mode=qi_t';
 
             // Função que executa o redirecionamento
             let redirecionado = false;

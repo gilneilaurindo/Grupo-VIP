@@ -332,26 +332,27 @@
             e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
         });
 
-        // Inteligência Avançada - URL COMPLETAS PARA EVITAR FALHAS DE LEITURA DO NAVEGADOR
+        // Inteligência Avançada - URL COMPLETAS (Corrigido para remover parâmetros que quebram o WhatsApp)
         function obterLinkDoGrupo(endereco, bairro) {
             const loc = (endereco + " " + bairro).toLowerCase();
             
-            if (loc.includes("pereiro")) return 'https://chat.whatsapp.com/DfrhmCsFVbR3nlzB68q0bO?mode=qi_t';
-            if (loc.includes("severiano")) return 'https://chat.whatsapp.com/DqdXJJxU24IIHqGlSq0sGa?mode=qi_t';
-            if (loc.includes("venha")) return 'https://chat.whatsapp.com/Iqin7d3t7PW98CjhYKTepv?mode=qi_t';
-            if (loc.includes("coronel") || loc.includes("pessoa")) return 'https://chat.whatsapp.com/lleq2tjy6s71JbfucjVfJV?mode=qi_t';
-            if (loc.includes("encanto")) return 'https://chat.whatsapp.com/Ee39UHNPqdO4XJNSnMmtqV?mode=qi_t';
+            // URLs limpas para evitar o erro "Falha ao obter dados do grupo" no Mobile
+            if (loc.includes("pereiro")) return 'https://chat.whatsapp.com/DfrhmCsFVbR3nlzB68q0bO';
+            if (loc.includes("severiano")) return 'https://chat.whatsapp.com/DqdXJJxU24IIHqGlSq0sGa';
+            if (loc.includes("venha")) return 'https://chat.whatsapp.com/Iqin7d3t7PW98CjhYKTepv';
+            if (loc.includes("coronel") || loc.includes("pessoa")) return 'https://chat.whatsapp.com/lleq2tjy6s71JbfucjVfJV';
+            if (loc.includes("encanto")) return 'https://chat.whatsapp.com/Ee39UHNPqdO4XJNSnMmtqV';
             
             if (loc.includes("sítio") || loc.includes("sitio") || loc.includes("rural") || loc.includes("fazenda")) {
                 return Math.random() > 0.5 
-                    ? 'https://chat.whatsapp.com/CKmlGgsLF9s8hxKXSxWSHD?mode=qi_t' 
-                    : 'https://chat.whatsapp.com/KX4a4Zqm07AFF6fZlfyf5p?mode=qi_t';
+                    ? 'https://chat.whatsapp.com/CKmlGgsLF9s8hxKXSxWSHD' 
+                    : 'https://chat.whatsapp.com/KX4a4Zqm07AFF6fZlfyf5p';
             }
-            if (loc.includes("centro")) return 'https://chat.whatsapp.com/LZEqORjPmXD2Fbl7Ce0IWj?mode=qi_t';
+            if (loc.includes("centro")) return 'https://chat.whatsapp.com/LZEqORjPmXD2Fbl7Ce0IWj';
             
             return (loc.length % 2 === 0) 
-                ? 'https://chat.whatsapp.com/L0Ykw6Xz6ZGLOmVAZaw42c?mode=qi_t' 
-                : 'https://chat.whatsapp.com/GNjBFvEY4PgCbGyEmMEbuj?mode=qi_t';
+                ? 'https://chat.whatsapp.com/L0Ykw6Xz6ZGLOmVAZaw42c' 
+                : 'https://chat.whatsapp.com/GNjBFvEY4PgCbGyEmMEbuj';
         }
 
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx8swlEMNhx6NdK7s5wGBSD2Oc91DCAzDQw8Fvz23uezdABdCYOpHJbQGNvps4bHjuz4w/exec';
@@ -393,22 +394,13 @@
             // Obtém o link exato e completo
             const linkOficial = obterLinkDoGrupo(enderecoDigitado, bairroDigitado);
 
-            // Redirecionamento blindado usando um clique fantasma HTML (Imita o clique real de uma pessoa)
+            // Redirecionamento blindado
             let redirecionado = false;
             const irParaWhatsApp = () => {
                 if (!redirecionado) {
                     redirecionado = true;
-                    
-                    let a = document.createElement('a');
-                    a.href = linkOficial;
-                    a.target = '_top'; 
-                    document.body.appendChild(a);
-                    a.click(); // Força o telemóvel a abrir a aplicação sem erro de Javascript
-                    
-                    // Fallback extra
-                    setTimeout(() => {
-                        window.top.location.href = linkOficial; 
-                    }, 500);
+                    // Redirecionamento direto usando location.href é o mais seguro para abrir o App
+                    window.location.href = linkOficial;
                 }
             };
 
@@ -426,6 +418,7 @@
                 irParaWhatsApp();
             });
 
+            // Fallback de segurança caso a conexão falhe, redireciona mesmo assim
             setTimeout(() => {
                 irParaWhatsApp();
             }, 1500);

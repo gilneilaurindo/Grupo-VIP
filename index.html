@@ -242,10 +242,16 @@
                         </div>
                         <h3 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Cadastro realizado com sucesso!</h3>
                         <p class="text-gray-600 mb-8 max-w-sm mx-auto">Em breve você receberá o convite para o grupo.</p>
-                        <!-- Removido o target="_blank" para forçar a abertura da aplicação no telemóvel -->
+                        
+                        <!-- BOTÃO PRINCIPAL (Usando target="_top" para forçar saída do WebView) -->
                         <a href="#" id="wppGroupLink" class="w-full max-w-xs btn-gradient bg-potiguar text-white px-6 py-4 rounded-xl font-bold hover:bg-potiguar-dark transition shadow-lg flex items-center justify-center gap-2 text-center">
                             <i class="fab fa-whatsapp text-2xl"></i> Entrar no Grupo VIP
                         </a>
+                        
+                        <!-- PLANO INFALÍVEL: Botão para copiar o link manualmente caso nada funcione -->
+                        <button id="copyLinkBtn" type="button" class="mt-5 text-sm font-semibold text-gray-500 hover:text-potiguar underline hidden transition-colors duration-300 flex items-center gap-2">
+                            <i class="fas fa-copy"></i> O botão não funcionou? Copiar Link
+                        </button>
                     </div>
 
                     <!-- Formulário -->
@@ -338,25 +344,21 @@
 
     <!-- SCRIPTS DE COMPORTAMENTO E ENVIO -->
     <script>
-        // Inteligência Avançada + Sistema Anti-Bloqueio de WebViews (Instagram/Facebook)
+        // Inteligência Avançada (Retorna apenas os IDs dos grupos)
         function obterCodigoDoGrupo(endereco, bairro) {
             const loc = (endereco + " " + bairro).toLowerCase();
             
-            // Cidades Vizinhas (Retorna apenas o CÓDIGO de convite)
             if (loc.includes("pereiro")) return 'DfrhmCsFVbR3nlzB68q0bO';
             if (loc.includes("severiano")) return 'DqdXJJxU24IIHqGlSq0sGa';
             if (loc.includes("venha")) return 'Iqin7d3t7PW98CjhYKTepv';
             if (loc.includes("coronel") || loc.includes("pessoa")) return 'lleq2tjy6s71JbfucjVfJV';
             if (loc.includes("encanto")) return 'Ee39UHNPqdO4XJNSnMmtqV';
             
-            // Região de São Miguel / RN e Zonas Rurais
             if (loc.includes("sítio") || loc.includes("sitio") || loc.includes("rural") || loc.includes("fazenda")) {
                 return Math.random() > 0.5 ? 'CKmlGgsLF9s8hxKXSxWSHD' : 'KX4a4Zqm07AFF6fZlfyf5p';
             }
-            
             if (loc.includes("centro")) return 'LZEqORjPmXD2Fbl7Ce0IWj';
             
-            // Padrão: Bairro 01 ou 02 (distribuído de forma equilibrada)
             return (loc.length % 2 === 0) ? 'L0Ykw6Xz6ZGLOmVAZaw42c' : 'GNjBFvEY4PgCbGyEmMEbuj';
         }
 
@@ -410,34 +412,32 @@
                 if(typeof fbq !== 'undefined') { fbq('track', 'Lead'); }
 
                 const codigoGrupo = obterCodigoDoGrupo(enderecoDigitado, bairroDigitado);
+                
+                // Link oficial Universal do WhatsApp (Sem ?mode)
                 const linkOficial = 'https://chat.whatsapp.com/' + codigoGrupo;
                 
-                // Recria o botão para injetar o novo comportamento sem acumular bugs
-                let btnWppVelho = document.getElementById('wppGroupLink');
-                let btnWppNovo = btnWppVelho.cloneNode(true);
-                btnWppVelho.parentNode.replaceChild(btnWppNovo, btnWppVelho);
+                // 1. Configura o botão principal com target="_top" (quebra o WebView do Instagram)
+                let btnWpp = document.getElementById('wppGroupLink');
+                btnWpp.href = linkOficial;
+                btnWpp.target = '_top'; // FUNDAMENTAL: Tira a pessoa da "gaiola" do Instagram
                 
-                btnWppNovo.href = linkOficial;
-                btnWppNovo.target = '_blank';
+                // 2. Configura o Plano B: O Botão de Copiar o Link
+                let copyBtn = document.getElementById('copyLinkBtn');
+                copyBtn.classList.remove('hidden');
                 
-                // LÓGICA DE PROGRAMADOR SENIOR: Deep Link Forçando abertura do App
-                btnWppNovo.addEventListener('click', function(event) {
-                    const isAndroid = /Android/i.test(navigator.userAgent);
-                    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-                    
-                    if (isAndroid) {
-                        event.preventDefault(); // Impede o navegador de abrir o link padrão
-                        // Intent nativo do Android forçando a abertura direta do aplicativo WhatsApp
-                        window.location.href = 'intent://chat.whatsapp.com/' + codigoGrupo + '#Intent;scheme=https;package=com.whatsapp;end';
-                        // Fallback salva-vidas se o app falhar ao abrir
-                        setTimeout(() => { window.location.href = linkOficial; }, 2000);
-                    } else if (isIOS) {
-                        event.preventDefault();
-                        // URL Scheme nativo do iOS
-                        window.location.href = 'whatsapp://chat?code=' + codigoGrupo;
-                        setTimeout(() => { window.location.href = linkOficial; }, 2000);
-                    }
-                    // Se for no Computador, ele ignora os de cima e abre a página padrão normalmente
+                // Remove event listeners antigos clonando (evita bugs se o utilizador clicar várias vezes)
+                let copyBtnNovo = copyBtn.cloneNode(true);
+                copyBtn.parentNode.replaceChild(copyBtnNovo, copyBtn);
+                
+                copyBtnNovo.addEventListener('click', function() {
+                    // Copia o link para a área de transferência do telemóvel
+                    navigator.clipboard.writeText(linkOficial).then(() => {
+                        copyBtnNovo.innerHTML = '<i class="fas fa-check text-green-500"></i> Link copiado! Cole no Safari ou Chrome.';
+                        copyBtnNovo.classList.add('text-green-600');
+                        copyBtnNovo.classList.remove('text-gray-500');
+                    }).catch(err => {
+                        alert("O seu telemóvel bloqueou a cópia automática. O link é: " + linkOficial);
+                    });
                 });
 
                 // Mostra a mensagem de sucesso

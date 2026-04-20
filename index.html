@@ -235,25 +235,6 @@
                 </div>
 
                 <div class="p-6 md:p-10 relative form-traditional">
-                    <!-- Overlay de Sucesso -->
-                    <div id="successMessage" class="hidden absolute inset-0 bg-white z-20 flex-col items-center justify-center text-center p-8">
-                        <div class="w-20 h-20 lg:w-24 lg:h-24 bg-green-100 rounded-full flex items-center justify-center mb-6 text-green-600 text-4xl lg:text-5xl animate-bounce">
-                            <i class="fas fa-check"></i>
-                        </div>
-                        <h3 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Cadastro realizado com sucesso!</h3>
-                        <p class="text-gray-600 mb-8 max-w-sm mx-auto">Em breve você receberá o convite para o grupo.</p>
-                        
-                        <!-- BOTÃO PRINCIPAL (Usando target="_top" para forçar saída do WebView) -->
-                        <a href="#" id="wppGroupLink" class="w-full max-w-xs btn-gradient bg-potiguar text-white px-6 py-4 rounded-xl font-bold hover:bg-potiguar-dark transition shadow-lg flex items-center justify-center gap-2 text-center">
-                            <i class="fab fa-whatsapp text-2xl"></i> Entrar no Grupo VIP
-                        </a>
-                        
-                        <!-- PLANO INFALÍVEL: Botão para copiar o link manualmente caso nada funcione -->
-                        <button id="copyLinkBtn" type="button" class="mt-5 text-sm font-semibold text-gray-500 hover:text-potiguar underline hidden transition-colors duration-300 flex items-center gap-2">
-                            <i class="fas fa-copy"></i> O botão não funcionou? Copiar Link
-                        </button>
-                    </div>
-
                     <!-- Formulário -->
                     <form id="vipForm" class="space-y-5">
                         
@@ -321,9 +302,10 @@
                             <p>Seus dados estão seguros.</p>
                         </div>
 
-                        <!-- Botão Submit -->
+                        <!-- Botão Submit Direto -->
                         <button id="submitBtn" type="submit" class="w-full pulse-btn bg-potiguar hover:bg-potiguar-dark text-white font-bold text-lg py-4 rounded-lg shadow-lg transition duration-300 flex items-center justify-center gap-3 mt-6">
-                            <span id="btnText">Enviar Cadastro</span>
+                            <i class="fab fa-whatsapp text-2xl"></i>
+                            <span id="btnText">Confirmar e Entrar no Grupo VIP</span>
                             <span id="btnLoader" class="loader hidden"></span>
                         </button>
                     </form>
@@ -368,7 +350,6 @@
         const submitBtn = document.getElementById('submitBtn');
         const btnText = document.getElementById('btnText');
         const btnLoader = document.getElementById('btnLoader');
-        const successMessage = document.getElementById('successMessage');
 
         form.addEventListener('submit', e => {
             e.preventDefault();
@@ -384,7 +365,7 @@
 
             // UI de carregamento
             submitBtn.disabled = true;
-            btnText.textContent = "Enviando...";
+            btnText.textContent = "A entrar no WhatsApp...";
             btnLoader.classList.remove('hidden');
 
             // Captura dados
@@ -402,6 +383,20 @@
             data.append('origem', formData.get('origem')); 
             data.append('interesse', interessesSelecionados);
 
+            const codigoGrupo = obterCodigoDoGrupo(enderecoDigitado, bairroDigitado);
+            const linkOficial = 'https://chat.whatsapp.com/' + codigoGrupo;
+
+            // Função que executa o redirecionamento
+            let redirecionado = false;
+            const irParaWhatsApp = () => {
+                if (!redirecionado) {
+                    redirecionado = true;
+                    // O redirecionamento usa '_top' por segurança caso esteja no Instagram/Facebook
+                    window.top.location.href = linkOficial; 
+                }
+            };
+
+            // Envia os dados para a planilha em background
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 body: data,
@@ -410,49 +405,19 @@
             .then(() => {
                 // Dispara o evento de Lead para o Pixel
                 if(typeof fbq !== 'undefined') { fbq('track', 'Lead'); }
-
-                const codigoGrupo = obterCodigoDoGrupo(enderecoDigitado, bairroDigitado);
-                
-                // Link oficial Universal do WhatsApp (Sem ?mode)
-                const linkOficial = 'https://chat.whatsapp.com/' + codigoGrupo;
-                
-                // 1. Configura o botão principal com target="_top" (quebra o WebView do Instagram)
-                let btnWpp = document.getElementById('wppGroupLink');
-                btnWpp.href = linkOficial;
-                btnWpp.target = '_top'; // FUNDAMENTAL: Tira a pessoa da "gaiola" do Instagram
-                
-                // 2. Configura o Plano B: O Botão de Copiar o Link
-                let copyBtn = document.getElementById('copyLinkBtn');
-                copyBtn.classList.remove('hidden');
-                
-                // Remove event listeners antigos clonando (evita bugs se o utilizador clicar várias vezes)
-                let copyBtnNovo = copyBtn.cloneNode(true);
-                copyBtn.parentNode.replaceChild(copyBtnNovo, copyBtn);
-                
-                copyBtnNovo.addEventListener('click', function() {
-                    // Copia o link para a área de transferência do telemóvel
-                    navigator.clipboard.writeText(linkOficial).then(() => {
-                        copyBtnNovo.innerHTML = '<i class="fas fa-check text-green-500"></i> Link copiado! Cole no Safari ou Chrome.';
-                        copyBtnNovo.classList.add('text-green-600');
-                        copyBtnNovo.classList.remove('text-gray-500');
-                    }).catch(err => {
-                        alert("O seu telemóvel bloqueou a cópia automática. O link é: " + linkOficial);
-                    });
-                });
-
-                // Mostra a mensagem de sucesso
-                successMessage.classList.remove('hidden');
-                successMessage.classList.add('flex');
-                form.classList.add('hidden');
-                document.getElementById('cadastro').scrollIntoView({ behavior: 'smooth' });
+                irParaWhatsApp();
             })
             .catch(error => {
-                console.error('Erro no envio:', error);
-                alert('Erro ao enviar. Verifique sua conexão ou tente novamente.');
-                submitBtn.disabled = false;
-                btnText.textContent = "Tentar Novamente";
-                btnLoader.classList.add('hidden');
+                console.error('Erro na planilha, mas enviando cliente para o grupo mesmo assim:', error);
+                irParaWhatsApp(); // Garante a entrada no grupo mesmo se a internet falhar ao enviar para a planilha
             });
+
+            // GATILHO DE SEGURANÇA: Se a planilha demorar mais de 1.5 segundos para responder, 
+            // manda a pessoa para o grupo automaticamente para não a deixar esperando.
+            setTimeout(() => {
+                irParaWhatsApp();
+            }, 1500);
+            
         });
     </script>
 

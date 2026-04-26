@@ -10,7 +10,7 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-TZPL0QW8MG');
+      gtag('config', 'G-TZPL0QW8MG'); 
     </script>
     
     <!-- Meta Pixel Code -->
@@ -252,24 +252,38 @@
                                 <input type="tel" name="whatsapp" id="whatsapp" placeholder="(XX) XXXXX-XXXX" maxlength="15" required>
                             </div>
                             <div class="form-group">
-                                <label for="endereco">Endereço</label>
-                                <input type="text" name="endereco" id="endereco" placeholder="Rua, número" required>
+                                <label for="cidade">Sua Cidade</label>
+                                <select name="cidade" id="cidade" required>
+                                    <option value="" disabled selected>Selecione a cidade...</option>
+                                    <option value="Pereiro">Pereiro/CE</option>
+                                    <option value="Dr severiano">Dr Severiano/CE</option>
+                                    <option value="Venha ver">Venha Ver/RN</option>
+                                    <option value="Coronel J. Pessoa">Coronel J. Pessoa/RN</option>
+                                    <option value="Encanto">Encanto/RN</option>
+                                    <option value="São Miguel">São Miguel/RN</option>
+                                    <option value="Outra">Outra Cidade</option>
+                                </select>
                             </div>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="form-group">
-                                <label for="bairro">Bairro</label>
-                                <input type="text" name="bairro" id="bairro" placeholder="Ex: Centro" required>
+                                <label for="bairro">Bairro / Comunidade</label>
+                                <input type="text" name="bairro" id="bairro" placeholder="Ex: Centro, Sítio..." required>
                             </div>
                             <div class="form-group">
-                                <label for="cliente">Você já é cliente?</label>
-                                <select name="cliente" id="cliente" required>
-                                    <option value="" disabled selected>Selecione...</option>
-                                    <option value="Sim">Sim, já sou cliente</option>
-                                    <option value="Não">Não, sou novo</option>
-                                </select>
+                                <label for="endereco">Endereço</label>
+                                <input type="text" name="endereco" id="endereco" placeholder="Rua, número" required>
                             </div>
+                        </div>
+                        
+                        <div class="form-group mt-4">
+                            <label for="cliente">Você já é cliente?</label>
+                            <select name="cliente" id="cliente" required>
+                                <option value="" disabled selected>Selecione...</option>
+                                <option value="Sim">Sim, já sou cliente</option>
+                                <option value="Não">Não, sou novo</option>
+                            </select>
                         </div>
 
                         <!-- Campo Ouro -->
@@ -332,27 +346,39 @@
             e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
         });
 
-        // Inteligência Avançada - URL COMPLETAS (Corrigido para remover parâmetros que quebram o WhatsApp)
-        function obterLinkDoGrupo(endereco, bairro) {
-            const loc = (endereco + " " + bairro).toLowerCase();
-            
-            // URLs limpas para evitar o erro "Falha ao obter dados do grupo" no Mobile
-            if (loc.includes("pereiro")) return 'https://chat.whatsapp.com/DfrhmCsFVbR3nlzB68q0bO';
-            if (loc.includes("severiano")) return 'https://chat.whatsapp.com/DqdXJJxU24IIHqGlSq0sGa';
-            if (loc.includes("venha")) return 'https://chat.whatsapp.com/Iqin7d3t7PW98CjhYKTepv';
-            if (loc.includes("coronel") || loc.includes("pessoa")) return 'https://chat.whatsapp.com/lleq2tjy6s71JbfucjVfJV';
-            if (loc.includes("encanto")) return 'https://chat.whatsapp.com/Ee39UHNPqdO4XJNSnMmtqV';
-            
-            if (loc.includes("sítio") || loc.includes("sitio") || loc.includes("rural") || loc.includes("fazenda")) {
-                return Math.random() > 0.5 
-                    ? 'https://chat.whatsapp.com/CKmlGgsLF9s8hxKXSxWSHD' 
-                    : 'https://chat.whatsapp.com/KX4a4Zqm07AFF6fZlfyf5p';
+        // 🧠 INTELIGÊNCIA AVANÇADA DE ROTEAMENTO DEFINITIVA
+        function obterLinkDoGrupo(cidade, bairro, endereco) {
+            // Verifica se no bairro ou endereço tem indício de zona rural
+            const textoLocal = (bairro + " " + endereco).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+            const isRural = textoLocal.includes("rural") || 
+                            textoLocal.includes("sitio") || 
+                            textoLocal.includes("fazenda") || 
+                            textoLocal.includes("povoado");
+
+            // Roteamento se a pessoa marcou "Outra Cidade"
+            if (cidade === "Outra") {
+                if (isRural) {
+                    return 'https://chat.whatsapp.com/CKmlGgsLF9s8hxKXSxWSHD'; // Zona Rural de outras cidades
+                } else {
+                    return 'https://chat.whatsapp.com/L0Ykw6Xz6ZGLOmVAZaw42c'; // Outra Cidade
+                }
             }
-            if (loc.includes("centro")) return 'https://chat.whatsapp.com/LZEqORjPmXD2Fbl7Ce0IWj';
+
+            // Se é Zona Rural de uma das 6 Cidades principais mapeadas
+            if (isRural) {
+                return 'https://chat.whatsapp.com/KX4a4Zqm07AFF6fZlfyf5p';
+            }
+
+            // Se for Área Urbana das Cidades principais
+            if (cidade === "Pereiro") return 'https://chat.whatsapp.com/DfrhmCsFVbR3nlzB68q0bO';
+            if (cidade === "Dr severiano") return 'https://chat.whatsapp.com/DqdXJJxU24lIHgGISg0sGa';
+            if (cidade === "Venha ver") return 'https://chat.whatsapp.com/Igin7d3t7PW98CjhYKTepv';
+            if (cidade === "Coronel J. Pessoa") return 'https://chat.whatsapp.com/Ileg2tjy6s71JbfucjVfJV';
+            if (cidade === "Encanto") return 'https://chat.whatsapp.com/Ee39UHNPgdO4XJNSnMmtgV';
+            if (cidade === "São Miguel") return 'https://chat.whatsapp.com/LZEgORjPmXD2Fbl7Ce0lWj';
             
-            return (loc.length % 2 === 0) 
-                ? 'https://chat.whatsapp.com/L0Ykw6Xz6ZGLOmVAZaw42c' 
-                : 'https://chat.whatsapp.com/GNjBFvEY4PgCbGyEmMEbuj';
+            // Backup de segurança
+            return 'https://chat.whatsapp.com/GNjBFvEY4PgCbGyEmMEbui'; 
         }
 
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx8swlEMNhx6NdK7s5wGBSD2Oc91DCAzDQw8Fvz23uezdABdCYOpHJbQGNvps4bHjuz4w/exec';
@@ -380,27 +406,28 @@
             const formData = new FormData(form);
             const data = new URLSearchParams();
 
+            const cidadeSelecionada = formData.get('cidade') || '';
             const enderecoDigitado = formData.get('endereco') || '';
             const bairroDigitado = formData.get('bairro') || '';
 
             data.append('nome', formData.get('nome'));
             data.append('whatsapp', formData.get('whatsapp'));
+            data.append('cidade', cidadeSelecionada); // Enviando a cidade para a planilha
             data.append('endereco', enderecoDigitado);
             data.append('bairro', bairroDigitado);
             data.append('cliente', formData.get('cliente'));
             data.append('origem', formData.get('origem')); 
             data.append('interesse', interessesSelecionados);
 
-            // Obtém o link exato e completo
-            const linkOficial = obterLinkDoGrupo(enderecoDigitado, bairroDigitado);
+            // Obtém o link exato baseado na Cidade e se é Rural/Urbano
+            const linkOficial = obterLinkDoGrupo(cidadeSelecionada, bairroDigitado, enderecoDigitado);
 
             // Redirecionamento blindado
             let redirecionado = false;
             const irParaWhatsApp = () => {
                 if (!redirecionado) {
                     redirecionado = true;
-                    // Redirecionamento direto usando location.href é o mais seguro para abrir o App
-                    window.location.href = linkOficial;
+                    window.open(linkOficial, '_blank');
                 }
             };
 
@@ -418,10 +445,10 @@
                 irParaWhatsApp();
             });
 
-            // Fallback de segurança caso a conexão falhe, redireciona mesmo assim
+            // Fallback de segurança caso a conexão falhe, redireciona mesmo assim em 800ms
             setTimeout(() => {
                 irParaWhatsApp();
-            }, 1500);
+            }, 800);
         });
     </script>
 
